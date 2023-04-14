@@ -44,6 +44,10 @@
 		B35895D629E94DFE00DE4F05 /* TrailerSpotUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TrailerSpotUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B35895DA29E94DFE00DE4F05 /* TrailerSpotUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrailerSpotUITests.swift; sourceTree = "<group>"; };
 		B35895DC29E94DFE00DE4F05 /* TrailerSpotUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrailerSpotUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		B35895ED29E9536600DE4F05 /* Data */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Data; sourceTree = "<group>"; };
+		B35895EE29E9537F00DE4F05 /* Model */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Model; sourceTree = "<group>"; };
+		B35895EF29E9539700DE4F05 /* Navigation */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Navigation; sourceTree = "<group>"; };
+		B35895F029E953BF00DE4F05 /* Domain */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Domain; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +78,10 @@
 		B35895B329E94DFD00DE4F05 = {
 			isa = PBXGroup;
 			children = (
+				B35895ED29E9536600DE4F05 /* Data */,
+				B35895F029E953BF00DE4F05 /* Domain */,
+				B35895EE29E9537F00DE4F05 /* Model */,
+				B35895EF29E9539700DE4F05 /* Navigation */,
 				B35895BE29E94DFD00DE4F05 /* TrailerSpot */,
 				B35895CF29E94DFE00DE4F05 /* TrailerSpotTests */,
 				B35895D929E94DFE00DE4F05 /* TrailerSpotUITests */,
