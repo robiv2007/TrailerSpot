@@ -23,7 +23,7 @@ struct MovieListView: View {
                 }
             }
             .onAppear {
-                vm.fetchPosts()
+                vm.fetchMovies()
             }
         }
         .padding(16)

@@ -25,7 +25,7 @@ class MovieListViewModel: ObservableObject {
         self.repository = repository
     }
     
-    func fetchPosts() {
+    func fetchMovies() {
         print("Fetch")
         isLoading = true
         repository.getMovies()
