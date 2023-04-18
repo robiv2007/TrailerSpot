@@ -7,8 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B33F64C829EE8DF20097C011 /* Data in Frameworks */ = {isa = PBXBuildFile; productRef = B33F64C729EE8DF20097C011 /* Data */; };
+		B33F64CA29EE8DF20097C011 /* Domain in Frameworks */ = {isa = PBXBuildFile; productRef = B33F64C929EE8DF20097C011 /* Domain */; };
+		B33F64CC29EE8DF20097C011 /* Model in Frameworks */ = {isa = PBXBuildFile; productRef = B33F64CB29EE8DF20097C011 /* Model */; };
+		B33F64CE29EE8DF20097C011 /* Navigation in Frameworks */ = {isa = PBXBuildFile; productRef = B33F64CD29EE8DF20097C011 /* Navigation */; };
+		B33F64D029EE8F020097C011 /* MovieListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B33F64CF29EE8F020097C011 /* MovieListViewModel.swift */; };
 		B35895C029E94DFD00DE4F05 /* TrailerSpotApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35895BF29E94DFD00DE4F05 /* TrailerSpotApp.swift */; };
-		B35895C229E94DFD00DE4F05 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35895C129E94DFD00DE4F05 /* ContentView.swift */; };
+		B35895C229E94DFD00DE4F05 /* MovieListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35895C129E94DFD00DE4F05 /* MovieListView.swift */; };
 		B35895C429E94DFD00DE4F05 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B35895C329E94DFD00DE4F05 /* Assets.xcassets */; };
 		B35895C729E94DFD00DE4F05 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B35895C629E94DFD00DE4F05 /* Preview Assets.xcassets */; };
 		B35895D129E94DFE00DE4F05 /* TrailerSpotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35895D029E94DFE00DE4F05 /* TrailerSpotTests.swift */; };
@@ -34,9 +39,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B33F64CF29EE8F020097C011 /* MovieListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListViewModel.swift; sourceTree = "<group>"; };
 		B35895BC29E94DFD00DE4F05 /* TrailerSpot.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TrailerSpot.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B35895BF29E94DFD00DE4F05 /* TrailerSpotApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrailerSpotApp.swift; sourceTree = "<group>"; };
-		B35895C129E94DFD00DE4F05 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		B35895C129E94DFD00DE4F05 /* MovieListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListView.swift; sourceTree = "<group>"; };
 		B35895C329E94DFD00DE4F05 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B35895C629E94DFD00DE4F05 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		B35895CC29E94DFE00DE4F05 /* TrailerSpotTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TrailerSpotTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -55,6 +61,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B33F64CC29EE8DF20097C011 /* Model in Frameworks */,
+				B33F64CA29EE8DF20097C011 /* Domain in Frameworks */,
+				B33F64CE29EE8DF20097C011 /* Navigation in Frameworks */,
+				B33F64C829EE8DF20097C011 /* Data in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -75,6 +85,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B33F64C629EE8DF20097C011 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		B35895B329E94DFD00DE4F05 = {
 			isa = PBXGroup;
 			children = (
@@ -86,6 +103,7 @@
 				B35895CF29E94DFE00DE4F05 /* TrailerSpotTests */,
 				B35895D929E94DFE00DE4F05 /* TrailerSpotUITests */,
 				B35895BD29E94DFD00DE4F05 /* Products */,
+				B33F64C629EE8DF20097C011 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -103,7 +121,8 @@
 			isa = PBXGroup;
 			children = (
 				B35895BF29E94DFD00DE4F05 /* TrailerSpotApp.swift */,
-				B35895C129E94DFD00DE4F05 /* ContentView.swift */,
+				B33F64CF29EE8F020097C011 /* MovieListViewModel.swift */,
+				B35895C129E94DFD00DE4F05 /* MovieListView.swift */,
 				B35895C329E94DFD00DE4F05 /* Assets.xcassets */,
 				B35895C529E94DFD00DE4F05 /* Preview Content */,
 			);
@@ -151,6 +170,12 @@
 			dependencies = (
 			);
 			name = TrailerSpot;
+			packageProductDependencies = (
+				B33F64C729EE8DF20097C011 /* Data */,
+				B33F64C929EE8DF20097C011 /* Domain */,
+				B33F64CB29EE8DF20097C011 /* Model */,
+				B33F64CD29EE8DF20097C011 /* Navigation */,
+			);
 			productName = TrailerSpot;
 			productReference = B35895BC29E94DFD00DE4F05 /* TrailerSpot.app */;
 			productType = "com.apple.product-type.application";
@@ -265,8 +290,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B35895C229E94DFD00DE4F05 /* ContentView.swift in Sources */,
+				B35895C229E94DFD00DE4F05 /* MovieListView.swift in Sources */,
 				B35895C029E94DFD00DE4F05 /* TrailerSpotApp.swift in Sources */,
+				B33F64D029EE8F020097C011 /* MovieListViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -591,6 +617,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		B33F64C729EE8DF20097C011 /* Data */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Data;
+		};
+		B33F64C929EE8DF20097C011 /* Domain */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Domain;
+		};
+		B33F64CB29EE8DF20097C011 /* Model */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Model;
+		};
+		B33F64CD29EE8DF20097C011 /* Navigation */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Navigation;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = B35895B429E94DFD00DE4F05 /* Project object */;
 }

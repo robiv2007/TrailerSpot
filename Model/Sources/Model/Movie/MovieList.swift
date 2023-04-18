@@ -7,7 +7,11 @@
 
 import Foundation
 
-struct MovieList: Codable {
-    let page: Int
-    let results: [Result]
+public struct MovieList: Codable {
+    public let page: Int
+    public let results: [Result]
+}
+
+public enum ResultError: Error {
+    case resourceNotFound(Error)
 }
