@@ -11,13 +11,11 @@ import Domain
 
 struct MovieListView: View {
     @StateObject var vm = MovieListViewModel()
-    let columns = [
-        GridItem(.adaptive(minimum: 120)),
-    ]
+
 
     var body: some View {
         ScrollView {
-            LazyVGrid(columns: columns, spacing: 20) {
+            LazyVGrid(columns: vm.columns, spacing: 20) {
                 ForEach(vm.movie) { movie in
                     image(path: movie.posterPath ?? "")
                 }
@@ -26,12 +24,13 @@ struct MovieListView: View {
                 vm.fetchMovies()
             }
         }
+        .scrollIndicators(.hidden)
         .padding(16)
     }
 
     @ViewBuilder
     private func image(path: String) -> some View {
-        AsyncImage(url: URL(string: "https://image.tmdb.org/t/p/w500/\(path )")) {
+        AsyncImage(url: URL(string: "\(vm.imageUrl)\(path )")) {
             $0.resizable()
                 .cornerRadius(10)
         }placeholder: {
