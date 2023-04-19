@@ -11,21 +11,25 @@ import Combine
 import Foundation
 import Model
 import Data
+import SwiftUI
 
 
 class MovieListViewModel: ObservableObject {
     @Published var movie = [Result]()
-    @Published var isLoading = false
-    @Published var error: Error?
-    
+    let imageUrl = "https://image.tmdb.org/t/p/w500/"
+    private var isLoading = false
+    private var error: Error?
     private let repository: MovieRepository
     private var cancellables = Set<AnyCancellable>()
+    let columns = [
+        GridItem(.adaptive(minimum: 120)),
+    ]
     
     init(repository: MovieRepository = MovieRepositoryImpl()) {
         self.repository = repository
     }
     
-    func fetchPosts() {
+    func fetchMovies() {
         print("Fetch")
         isLoading = true
         repository.getMovies()

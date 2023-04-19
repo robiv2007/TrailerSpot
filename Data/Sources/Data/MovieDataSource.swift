@@ -27,7 +27,6 @@ public class MovieDataSource: MovieData {
                        ResultError.resourceNotFound(error)
                    }
                    .eraseToAnyPublisher()
-
     }
 
     public func getMovie(by id: String) {
