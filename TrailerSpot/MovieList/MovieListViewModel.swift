@@ -16,6 +16,7 @@ import SwiftUI
 
 class MovieListViewModel: ObservableObject {
     @Published var movie = [Result]()
+    @Published var upcomingMovies = [Result]()
     let imageUrl = "https://image.tmdb.org/t/p/w500/"
     private var isLoading = false
     private var error: Error?
@@ -23,6 +24,10 @@ class MovieListViewModel: ObservableObject {
     private var cancellables = Set<AnyCancellable>()
     let columns = [
         GridItem(.adaptive(minimum: 120)),
+    ]
+
+    let rows = [
+        GridItem(.flexible()),
     ]
     
     init(repository: MovieRepository = MovieRepositoryImpl()) {
@@ -47,6 +52,28 @@ class MovieListViewModel: ObservableObject {
             } receiveValue: { movie in
                 self.movie = movie.results
                 print("Movie value \(movie)")
+            }
+            .store(in: &cancellables)
+    }
+
+    func fetchUpcomingMovies() {
+        print("Fetch")
+        isLoading = true
+        repository.getUpcomingMovies()
+            .receive(on: DispatchQueue.main)
+            .sink { completion in
+                self.isLoading = false
+                switch completion {
+                case .failure(let error):
+                    self.error = error
+                    print("Error \(error)")
+                case .finished:
+                    print("Finished")
+                    break
+                }
+            } receiveValue: { movie in
+                self.upcomingMovies = movie.results
+                print("Upcoming Movies \(movie)")
             }
             .store(in: &cancellables)
     }

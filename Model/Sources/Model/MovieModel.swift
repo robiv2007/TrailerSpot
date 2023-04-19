@@ -12,7 +12,7 @@ public struct Result: Codable, Identifiable {
     public let id: Int
     public let originalLanguage, originalTitle, overview: String
     public let popularity: Double
-    public let posterPath: String?
+    public let posterPath: String
     public let releaseDate, title: String
     public let video: Bool
     public let voteAverage: Double

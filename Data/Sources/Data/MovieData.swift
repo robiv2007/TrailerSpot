@@ -11,4 +11,5 @@ import Combine
 
 public protocol MovieData {
     func getMovies() -> AnyPublisher<MovieList, ResultError>
+    func getUpcomingMovies() -> AnyPublisher<MovieList, ResultError>
 }
