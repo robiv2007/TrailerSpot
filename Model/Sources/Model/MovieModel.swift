@@ -32,8 +32,8 @@ public struct Result: Codable, Identifiable {
         case voteCount = "vote_count"
     }
     
-    static var mockMovie : Result
-    {Result(adult: false, genreIDS: [], id: 1, originalLanguage: "Eng", originalTitle: "Harry ", overview: "", popularity: 0.0, posterPath: "", releaseDate: "", title: "Harry", video: true, voteAverage: 0.0, voteCount: 1)}
+    static public var mockMovie : Result
+    {Result(adult: false, genreIDS: [], id: 1, originalLanguage: "Eng", originalTitle: "Harry ", overview: "", popularity: 0.0, posterPath: "/hR1jdCw0A9czgsbp45TASkjjBhA.jpg", releaseDate: "", title: "Harry", video: true, voteAverage: 0.0, voteCount: 1)}
 }
 
 

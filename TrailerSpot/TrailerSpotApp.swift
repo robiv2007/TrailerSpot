@@ -11,7 +11,9 @@ import SwiftUI
 struct TrailerSpotApp: App {
     var body: some Scene {
         WindowGroup {
-            MovieListView()
+            NavigationStack {
+                MovieListView()
+            }
         }
     }
 }

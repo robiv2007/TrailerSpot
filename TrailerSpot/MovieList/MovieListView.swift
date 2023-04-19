@@ -16,8 +16,10 @@ struct MovieListView: View {
     var body: some View {
         ScrollView {
             LazyVGrid(columns: vm.columns, spacing: 20) {
-                ForEach(vm.movie) { movie in
-                    image(path: movie.posterPath ?? "")
+                ForEach(vm.movie, id: \.id) { movie in
+                    NavigationLink(destination: MovieDetailView(movie: movie)) {
+                        image(path: movie.posterPath ?? "")
+                    }
                 }
             }
             .onAppear {
