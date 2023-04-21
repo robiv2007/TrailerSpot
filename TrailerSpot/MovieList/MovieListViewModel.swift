@@ -15,7 +15,7 @@ import SwiftUI
 
 
 class MovieListViewModel: ObservableObject {
-    @Published var movie = [Result]()
+    @Published var popularMovieSList = [Result]()
     @Published var upcomingMovies = [Result]()
     let imageUrl = "https://image.tmdb.org/t/p/w500/"
     private var isLoading = false
@@ -29,51 +29,39 @@ class MovieListViewModel: ObservableObject {
     let rows = [
         GridItem(.flexible()),
     ]
-    
+
     init(repository: MovieRepository = MovieRepositoryImpl()) {
         self.repository = repository
     }
-    
+
     func fetchMovies() {
-        print("Fetch")
-        isLoading = true
-        repository.getMovies()
-            .receive(on: DispatchQueue.main)
-            .sink { completion in
-                self.isLoading = false
-                switch completion {
-                case .failure(let error):
-                    self.error = error
-                    print("Error \(error)")
-                case .finished:
-                    print("Finished")
-                    break
-                }
-            } receiveValue: { movie in
-                self.movie = movie.results
-                print("Movie value \(movie)")
-            }
-            .store(in: &cancellables)
+        fetchData(publisher: repository.getMovies()) { [weak self] movies in
+            self?.popularMovieSList = movies
+        }
     }
 
     func fetchUpcomingMovies() {
-        print("Fetch")
+        fetchData(publisher: repository.getUpcomingMovies()) { [weak self] movies in
+            self?.upcomingMovies = movies
+        }
+    }
+
+    private func fetchData(publisher: AnyPublisher<MovieList, ResultError>, assignResults: @escaping ([Result]) -> Void) {
         isLoading = true
-        repository.getUpcomingMovies()
+        publisher
             .receive(on: DispatchQueue.main)
-            .sink { completion in
-                self.isLoading = false
+            .sink { [weak self] completion in
+                self?.isLoading = false
                 switch completion {
                 case .failure(let error):
-                    self.error = error
+                    self?.error = error
                     print("Error \(error)")
                 case .finished:
                     print("Finished")
-                    break
                 }
             } receiveValue: { movie in
-                self.upcomingMovies = movie.results
-                print("Upcoming Movies \(movie)")
+                assignResults(movie.results)
+                print("Movies \(movie)")
             }
             .store(in: &cancellables)
     }

@@ -11,7 +11,7 @@ import Domain
 
 struct MovieListView: View {
     @StateObject var vm = MovieListViewModel()
-    
+
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             ScrollView {
@@ -35,7 +35,7 @@ struct MovieListView: View {
         .preferredColorScheme(.dark)
         .padding(16)
     }
-    
+
     @ViewBuilder
     private func horizontalGrid() -> some View {
         ScrollView(.horizontal){
@@ -49,11 +49,11 @@ struct MovieListView: View {
             }
         }
     }
-    
+
     @ViewBuilder
     private func verticalGrid() -> some View {
         LazyVGrid(columns: vm.columns, spacing: 20) {
-            ForEach(vm.movie, id: \.id) { movie in
+            ForEach(vm.popularMovieSList, id: \.id) { movie in
                 NavigationLink(destination: MovieDetailView(movie: movie)) {
                     image(path: movie.posterPath)
                         .frame(width: 120, height: 180)
@@ -61,7 +61,7 @@ struct MovieListView: View {
             }
         }
     }
-    
+
     @ViewBuilder
     private func image(path: String) -> some View {
         AsyncImage(url: URL(string: "\(vm.imageUrl)\(path )")) {
@@ -71,7 +71,7 @@ struct MovieListView: View {
             ProgressView()
         }
     }
-    
+
     struct TextCategories: ViewModifier {
         let font = Font.system(size: 24).weight(.semibold)
         func body(content: Content) -> some View {

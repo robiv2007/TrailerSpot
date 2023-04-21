@@ -12,7 +12,7 @@ struct MovieDetailView: View {
     let movie: Result
     var body: some View {
         VStack {
-            image(path: movie.posterPath ?? "")
+            image(path: movie.posterPath)
                 .padding(.top, 80)
             Spacer()
         }
