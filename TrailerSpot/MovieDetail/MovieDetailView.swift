@@ -10,10 +10,33 @@ import Model
 
 struct MovieDetailView: View {
     let movie: Result
+    @State var showFullDescription : Bool = false
     var body: some View {
-        VStack {
-            image(path: movie.backDropPath)
-            Spacer()
+        ScrollView {
+            VStack(alignment: .leading, spacing: 24) {
+                image(path: movie.backDropPath)
+                expandableText()
+                Spacer()
+            }
+            .padding(16)
+        }
+    }
+
+    @ViewBuilder
+    private func expandableText() -> some View {
+        VStack(alignment: .leading, spacing: 8){
+            Text(movie.overview)
+                .lineLimit(showFullDescription ? nil : 2)
+                .foregroundColor(.secondary)
+            Button(action: {
+                withAnimation(.linear(duration: 0.3)) {
+                    showFullDescription.toggle()
+                }
+            }, label: {
+                Text(showFullDescription ? "Less" : "Read more..")
+                    .font(.caption)
+                    .fontWeight(.bold)
+            })
         }
     }
 
