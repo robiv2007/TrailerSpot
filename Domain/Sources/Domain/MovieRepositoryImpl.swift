@@ -19,7 +19,7 @@ public class MovieRepositoryImpl: MovieRepository {
         movieData.getMovies()
     }
     
-    public func getMovie(by id: String) {
-        movieData.getMovie(by: id)
+    public func getUpcomingMovies() -> AnyPublisher<MovieList, ResultError> {
+        movieData.getUpcomingMovies()
     }
 }
