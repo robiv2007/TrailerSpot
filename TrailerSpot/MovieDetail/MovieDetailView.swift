@@ -9,16 +9,27 @@ import SwiftUI
 import Model
 
 struct MovieDetailView: View {
+    @StateObject var vm = MovieDetailViewModel()
     let movie: Result
-    @State var showFullDescription : Bool = false
+   
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 24) {
-                image(path: movie.backDropPath)
+                ZStack(alignment: .bottomTrailing) {
+                    image(path: movie.backDropPath)
+                    RatingView(progress: $vm.progressValue,
+                               color: vm.voteAverageColor,
+                               rating: movie.voteAverage)
+                        .frame(width: 40)
+                        .padding(8)
+                }
                 expandableText()
                 Spacer()
             }
             .padding(16)
+            .onAppear {
+                vm.ratingSet(voteAverage: movie.voteAverage)
+            }
         }
     }
 
@@ -26,23 +37,23 @@ struct MovieDetailView: View {
     private func expandableText() -> some View {
         VStack(alignment: .leading, spacing: 8){
             Text(movie.overview)
-                .lineLimit(showFullDescription ? nil : 2)
+                .lineLimit(vm.showFullDescription ? nil : 2)
                 .foregroundColor(.secondary)
             Button(action: {
                 withAnimation(.linear(duration: 0.3)) {
-                    showFullDescription.toggle()
+                    vm.showFullDescription.toggle()
                 }
             }, label: {
-                Text(showFullDescription ? "Less" : "Read more..")
-                    .font(.caption)
+                Text(vm.showFullDescription ? "Less" : "Read more..")
                     .fontWeight(.bold)
             })
         }
+        .font(.subheadline)
     }
 
     @ViewBuilder
     private func image(path: String) -> some View {
-        AsyncImage(url: URL(string: "https://image.tmdb.org/t/p/w500/\(path )")) {
+        AsyncImage(url: URL(string: "\(vm.posterPath)\(path )")) {
             $0.resizable()
                 .scaledToFill()
                 .cornerRadius(10)

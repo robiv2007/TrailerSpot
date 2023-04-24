@@ -35,7 +35,7 @@ public struct Result: Codable, Identifiable {
     }
     
     static public var mockMovie : Result
-    {Result(adult: false, genreIDS: [], id: 1, originalLanguage: "Eng", originalTitle: "Harry ", overview: "", popularity: 0.0, posterPath: "/hR1jdCw0A9czgsbp45TASkjjBhA.jpg", releaseDate: "", title: "Harry", video: true, voteAverage: 0.0, voteCount: 1, backDropPath: "/lWqjXgut48IK5f5IRbDBAoO2Epp.jpg")}
+    {Result(adult: false, genreIDS: [], id: 1, originalLanguage: "Eng", originalTitle: "Harry ", overview: "", popularity: 0.0, posterPath: "/hR1jdCw0A9czgsbp45TASkjjBhA.jpg", releaseDate: "", title: "Harry", video: true, voteAverage: 6.0, voteCount: 1, backDropPath: "/lWqjXgut48IK5f5IRbDBAoO2Epp.jpg")}
 }
 
 

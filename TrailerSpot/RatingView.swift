@@ -10,6 +10,7 @@ import SwiftUI
 struct RatingView: View {
     @Binding var progress : Double
     var color : Color = Color.green
+    var rating: Double = 0.0
 
 
     var body: some View {
@@ -26,9 +27,13 @@ struct RatingView: View {
                 .rotationEffect(Angle(degrees: 270))
                 .animation(.easeInOut, value: 2.0)
 
+
             Circle()
                 .frame(width: 30, height: 30)
                 .foregroundColor(Color.white)
+            Text(String(format: "%.1f", rating))
+                .foregroundColor(.black)
+                .fontWeight(.bold)
         }
     }
 }
