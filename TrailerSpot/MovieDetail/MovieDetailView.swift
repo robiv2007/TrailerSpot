@@ -12,8 +12,7 @@ struct MovieDetailView: View {
     let movie: Result
     var body: some View {
         VStack {
-            image(path: movie.posterPath)
-                .padding(.top, 80)
+            image(path: movie.backDropPath)
             Spacer()
         }
     }
@@ -27,7 +26,7 @@ struct MovieDetailView: View {
         }placeholder: {
             ProgressView()
         }
-        .frame(width: 350, height: 400)
+        .frame(maxWidth: .infinity, maxHeight: 450)
     }
 }
 struct MovieDetailView_Previews: PreviewProvider {

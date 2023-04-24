@@ -14,7 +14,7 @@ public class MovieDataSource: MovieData {
     public init() { }
     
     public func getMovies() -> AnyPublisher<MovieList, ResultError> {
-        guard let url = URL(string: "https://api.themoviedb.org/3/discover/movie?api_key=ace7b669ec91ad7702878aa98fd99d60&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=true&page=1&with_watch_monetization_types=flatrate") else {
+        guard let url = URL(string: "https://api.themoviedb.org/3/discover/movie?api_key=ace7b669ec91ad7702878aa98fd99d60&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=true&include_image_language=en,null&page=1&with_watch_monetization_types=flatrate") else {
             return Fail(error: ResultError.resourceNotFound(Error.self as! Error)).eraseToAnyPublisher()
         }
         let urlRequest = URLRequest(url: url)
