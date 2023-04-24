@@ -17,6 +17,7 @@ public struct Result: Codable, Identifiable {
     public let video: Bool
     public let voteAverage: Double
     public let voteCount: Int
+    public let backDropPath: String
     
     enum CodingKeys: String, CodingKey {
         case adult
@@ -30,10 +31,11 @@ public struct Result: Codable, Identifiable {
         case title, video
         case voteAverage = "vote_average"
         case voteCount = "vote_count"
+        case backDropPath = "backdrop_path"
     }
     
     static public var mockMovie : Result
-    {Result(adult: false, genreIDS: [], id: 1, originalLanguage: "Eng", originalTitle: "Harry ", overview: "", popularity: 0.0, posterPath: "/hR1jdCw0A9czgsbp45TASkjjBhA.jpg", releaseDate: "", title: "Harry", video: true, voteAverage: 0.0, voteCount: 1)}
+    {Result(adult: false, genreIDS: [], id: 1, originalLanguage: "Eng", originalTitle: "Harry ", overview: "", popularity: 0.0, posterPath: "/hR1jdCw0A9czgsbp45TASkjjBhA.jpg", releaseDate: "", title: "Harry", video: true, voteAverage: 6.0, voteCount: 1, backDropPath: "/lWqjXgut48IK5f5IRbDBAoO2Epp.jpg")}
 }
 
 
