@@ -29,6 +29,8 @@ struct MovieDetailView: View {
             .padding(16)
             .onAppear {
                 vm.ratingSet(voteAverage: movie.voteAverage)
+                vm.fetchTrailers(id: movie.id)
+                print("TRAILERS \(vm.trailerList)")
             }
         }
     }

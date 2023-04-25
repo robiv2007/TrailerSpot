@@ -7,6 +7,6 @@
 
 import Foundation
 
-struct TrailerList: Codable {
-    let results: [TrailerResult]
+public struct TrailerList: Codable {
+    public let results: [TrailerResult]
 }

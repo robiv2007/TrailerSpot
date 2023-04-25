@@ -7,13 +7,13 @@
 
 import Foundation
 
-struct TrailerResult: Codable,Identifiable {
-    let name, key: String
-    let site: String
-    let official: Bool
-    let id: String
+public struct TrailerResult: Codable,Identifiable {
+    public let name, key: String
+    public let site: String
+    public let official: Bool
+    public let id: String
 
-    var youtubeURL: URL? {
+    public var youtubeURL: URL? {
         guard site == "YouTube" else {
             return nil
         }

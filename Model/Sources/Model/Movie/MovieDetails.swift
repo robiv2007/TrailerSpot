@@ -7,6 +7,6 @@
 
 import Foundation
 
-struct MovieDetails: Codable {
-    let videos: TrailerList
+public struct MovieDetails: Codable {
+    public let videos: TrailerList
 }
