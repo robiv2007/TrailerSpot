@@ -11,7 +11,7 @@ import Model
 struct MovieDetailView: View {
     @StateObject var vm = MovieDetailViewModel()
     let movie: Result
-   
+    
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 24) {
@@ -20,19 +20,34 @@ struct MovieDetailView: View {
                     RatingView(progress: $vm.progressValue,
                                color: vm.voteAverageColor,
                                rating: movie.voteAverage)
-                        .frame(width: 40)
-                        .padding(8)
+                    .frame(width: 40)
+                    .padding(8)
                 }
                 expandableText()
-                Spacer()
+                trailerWindow()
+                    .frame(minWidth: 0, maxWidth: .infinity, minHeight: 200, maxHeight: 300)
             }
             .padding(16)
             .onAppear {
-                vm.ratingSet(voteAverage: movie.voteAverage)
+                Task {
+                    vm.ratingSet(voteAverage: movie.voteAverage)
+                    vm.fetchTrailers(id: movie.id)
+                }
             }
         }
     }
-
+    
+    @ViewBuilder
+    private func trailerWindow() -> some View {
+        if let video = vm.trailerList.first?.youtubeURL {
+            YouTubeWebView(url: video.absoluteString)
+                .cornerRadius(12)
+        } else {
+            Text("Trailer not available")
+                .foregroundColor(.red)
+        }
+    }
+    
     @ViewBuilder
     private func expandableText() -> some View {
         VStack(alignment: .leading, spacing: 8){
@@ -50,7 +65,7 @@ struct MovieDetailView: View {
         }
         .font(.subheadline)
     }
-
+    
     @ViewBuilder
     private func image(path: String) -> some View {
         AsyncImage(url: URL(string: "\(vm.posterPath)\(path )")) {
@@ -63,6 +78,7 @@ struct MovieDetailView: View {
         .frame(maxWidth: .infinity, maxHeight: 450)
     }
 }
+
 struct MovieDetailView_Previews: PreviewProvider {
     static var previews: some View {
         MovieDetailView(movie: Result.mockMovie)

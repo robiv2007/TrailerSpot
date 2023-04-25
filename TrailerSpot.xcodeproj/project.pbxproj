@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B322A9EB29F7D7AA003207F4 /* YouTubeWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B322A9EA29F7D7AA003207F4 /* YouTubeWebView.swift */; };
 		B33F64C829EE8DF20097C011 /* Data in Frameworks */ = {isa = PBXBuildFile; productRef = B33F64C729EE8DF20097C011 /* Data */; };
 		B33F64CA29EE8DF20097C011 /* Domain in Frameworks */ = {isa = PBXBuildFile; productRef = B33F64C929EE8DF20097C011 /* Domain */; };
 		B33F64CC29EE8DF20097C011 /* Model in Frameworks */ = {isa = PBXBuildFile; productRef = B33F64CB29EE8DF20097C011 /* Model */; };
@@ -43,6 +44,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B322A9EA29F7D7AA003207F4 /* YouTubeWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YouTubeWebView.swift; sourceTree = "<group>"; };
 		B33F64CF29EE8F020097C011 /* MovieListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListViewModel.swift; sourceTree = "<group>"; };
 		B33F64D229EFF3F90097C011 /* AppDestinationViewer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDestinationViewer.swift; sourceTree = "<group>"; };
 		B33F64DC29F005F00097C011 /* MovieDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailView.swift; sourceTree = "<group>"; };
@@ -93,6 +95,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B322A9E929F7D788003207F4 /* YouTubeWebView */ = {
+			isa = PBXGroup;
+			children = (
+				B322A9EA29F7D7AA003207F4 /* YouTubeWebView.swift */,
+			);
+			path = YouTubeWebView;
+			sourceTree = "<group>";
+		};
 		B33F64C629EE8DF20097C011 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -154,6 +164,7 @@
 		B35895BE29E94DFD00DE4F05 /* TrailerSpot */ = {
 			isa = PBXGroup;
 			children = (
+				B322A9E929F7D788003207F4 /* YouTubeWebView */,
 				B33F64DB29F005D20097C011 /* MovieDetail */,
 				B33F64DA29F005A00097C011 /* MovieList */,
 				B33F64D129EFF3DB0097C011 /* AppNavigation */,
@@ -331,6 +342,7 @@
 				B35895C029E94DFD00DE4F05 /* TrailerSpotApp.swift in Sources */,
 				B33F64E229F6AA5A0097C011 /* RatingView.swift in Sources */,
 				B33F64D029EE8F020097C011 /* MovieListViewModel.swift in Sources */,
+				B322A9EB29F7D7AA003207F4 /* YouTubeWebView.swift in Sources */,
 				B33F64E429F6B1600097C011 /* MovieDetailViewModel.swift in Sources */,
 				B33F64D329EFF3F90097C011 /* AppDestinationViewer.swift in Sources */,
 			);
