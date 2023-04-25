@@ -35,7 +35,7 @@ class MovieListViewModel: ObservableObject {
     }
 
     func fetchMovies() {
-        fetchData(publisher: repository.getMovies()) { [weak self] movies in
+        fetchData(publisher: repository.getPopularMovies()) { [weak self] movies in
             self?.popularMovieSList = movies
         }
     }

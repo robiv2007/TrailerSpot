@@ -11,42 +11,37 @@ import Model
 
 public class MovieDataSource: MovieData {
 
-    public init() { }
+     let apiKey = "ace7b669ec91ad7702878aa98fd99d60"
+     let baseUrl = "https://api.themoviedb.org/3"
+
+
+    public init() {}
+
+    public func getPopularMovies() -> AnyPublisher<MovieList, ResultError> {
+           let endpoint = "\(baseUrl)/movie/popular?api_key=\(apiKey)"
+           return getMovies(from: endpoint)
+       }
+
+       public func getUpcomingMovies() -> AnyPublisher<MovieList, ResultError> {
+           let endpoint = "\(baseUrl)/movie/upcoming?api_key=\(apiKey)"
+           return getMovies(from: endpoint)
+       }
+
     
-    public func getMovies() -> AnyPublisher<MovieList, ResultError> {
-        guard let url = URL(string: "https://api.themoviedb.org/3/discover/movie?api_key=ace7b669ec91ad7702878aa98fd99d60&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=true&include_image_language=en,null&page=1&with_watch_monetization_types=flatrate") else {
-            return Fail(error: ResultError.resourceNotFound(Error.self as! Error)).eraseToAnyPublisher()
+    public func getMovies(from endpoint: String) -> AnyPublisher<MovieList, ResultError> {
+        guard let url = URL(string: endpoint) else {
+            return Fail(error: ResultError.resourceNotFound(endpoint)).eraseToAnyPublisher()
         }
         let urlRequest = URLRequest(url: url)
-               let session = URLSession.shared
+        let session = URLSession.shared
 
-               return session.dataTaskPublisher(for: urlRequest)
-                   .map { $0.data }
-                   .decode(type: MovieList.self, decoder: JSONDecoder())
-                   .mapError { error in
-                       ResultError.resourceNotFound(error)
-                   }
-                   .eraseToAnyPublisher()
+        return session.dataTaskPublisher(for: urlRequest)
+            .map { $0.data }
+            .decode(type: MovieList.self, decoder: JSONDecoder())
+            .mapError { error in
+                ResultError.apiError(error)
+            }
+            .eraseToAnyPublisher()
     }
-
-    public func getUpcomingMovies() -> AnyPublisher<MovieList, ResultError> {
-        guard let url = URL(string: "https://api.themoviedb.org/3/movie/upcoming?api_key=ace7b669ec91ad7702878aa98fd99d60&language=en-US&page=1&include_adult=false") else {
-            return Fail(error: ResultError.resourceNotFound(Error.self as! Error)).eraseToAnyPublisher()
-        }
-        let urlRequest = URLRequest(url: url)
-               let session = URLSession.shared
-
-               return session.dataTaskPublisher(for: urlRequest)
-                   .map { $0.data }
-                   .decode(type: MovieList.self, decoder: JSONDecoder())
-                   .mapError { error in
-                       ResultError.resourceNotFound(error)
-                   }
-                   .eraseToAnyPublisher()
-    }
-}
-
-enum APIError: Error {
-    case invalidURL(Error)
 }
 

@@ -13,5 +13,6 @@ public struct MovieList: Codable {
 }
 
 public enum ResultError: Error {
-    case resourceNotFound(Error)
+    case resourceNotFound(String)
+    case apiError(Error)
 }
