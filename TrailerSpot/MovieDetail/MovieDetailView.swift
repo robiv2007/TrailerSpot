@@ -25,7 +25,7 @@ struct MovieDetailView: View {
                 }
                 expandableText()
                 trailerWindow()
-                    .frame(minWidth: 0, maxWidth: .infinity, minHeight: 200, maxHeight: 300)
+                    .frame(minWidth: 0, maxWidth: .infinity, minHeight: 250, maxHeight: 400)
             }
             .padding(16)
             .onAppear {
@@ -39,7 +39,7 @@ struct MovieDetailView: View {
     private func trailerWindow() -> some View {
         if let video = vm.trailerList.first?.youtubeURL {
             YouTubeWebView(url: video.absoluteString)
-                .cornerRadius(12)
+                .cornerRadius(10)
         } else {
             Text("Trailer not available")
                 .foregroundColor(.red)

@@ -14,7 +14,9 @@ struct MovieListView: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
-            ScrollView {
+            logo()
+            ScrollView() {
+
                 VStack(alignment: .leading, spacing: 8) {
                     Text("Upcoming Movies")
                         .modifier(TextCategories())
@@ -34,6 +36,19 @@ struct MovieListView: View {
         }
         .preferredColorScheme(.dark)
         .padding(16)
+    }
+
+    @ViewBuilder
+    private func logo() -> some View {
+        HStack(spacing: 8){
+            Image("appLogo")
+                .resizable()
+                .frame(width: 45, height: 45)
+            Text("Trailer Spot")
+                .font(.title2)
+                .bold()
+        }
+        .padding(.bottom, 8)
     }
 
     @ViewBuilder
