@@ -39,7 +39,7 @@ class MovieDetailViewModel: ObservableObject {
         }
     }
 
-    private func fetchData(publisher: AnyPublisher<TrailerList, ResultError>, assignResults: @escaping ([TrailerResult]) -> Void) {
+    private func fetchData(publisher: AnyPublisher<MovieDetails, ResultError>, assignResults: @escaping ([TrailerResult]) -> Void) {
         isLoading = true
         publisher
             .receive(on: DispatchQueue.main)
@@ -53,7 +53,7 @@ class MovieDetailViewModel: ObservableObject {
                     print("Finished")
                 }
             } receiveValue: { trailer in
-                assignResults(trailer.results)
+                assignResults(trailer.videos.results.filter({$0.name == "Official Trailer" || $0.official == true || $0.official == false }))
                 print("Movies \(trailer)")
             }
             .store(in: &cancellables)
