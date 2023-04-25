@@ -29,10 +29,8 @@ struct MovieDetailView: View {
             }
             .padding(16)
             .onAppear {
-                Task {
-                    vm.ratingSet(voteAverage: movie.voteAverage)
-                    vm.fetchTrailers(id: movie.id)
-                }
+                vm.ratingSet(voteAverage: movie.voteAverage)
+                vm.fetchTrailers(id: movie.id)
             }
         }
     }
