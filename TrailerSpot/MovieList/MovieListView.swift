@@ -13,31 +13,58 @@ struct MovieListView: View {
     @StateObject var vm = MovieListViewModel()
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 8) {
+        VStack(alignment: .leading, spacing: 16) {
             logo()
             ScrollView() {
+                VStack(alignment: .leading, spacing: 16) {
+                    carouselWithImages()
 
-                VStack(alignment: .leading, spacing: 8) {
                     Text("Upcoming Movies")
                         .modifier(TextCategories())
-                        .font(.title)
+
                     horizontalGrid()
+
+                    Text("Popular")
+                        .modifier(TextCategories())
+
+                    verticalGrid()
+                        .onAppear {
+                            vm.fetchMovies()
+                            vm.fetchUpcomingMovies()
+                        }
                 }
-                Text("Popular")
-                    .font(.title)
-                    .modifier(TextCategories())
-                verticalGrid()
-                    .onAppear {
-                        vm.fetchMovies()
-                        vm.fetchUpcomingMovies()
-                    }
+                .font(.title)
+                .foregroundColor(.orange)
+
             }
             .scrollIndicators(.hidden)
         }
         .preferredColorScheme(.dark)
-        .padding(16)
+        .padding(.horizontal, 8)
     }
-
+    
+    @ViewBuilder
+    private func carouselWithImages() -> some View {
+        TabView(selection: $vm.currentIndex){
+            ForEach(vm.upcomingMovies.indices, id: \.self) { index in
+                ZStack(alignment: .topTrailing) {
+                    image(path: vm.upcomingMovies[index].backDropPath)
+                        .tag(index)
+                        .font(.title)
+                        .fontWeight(.bold)
+                }
+            }
+        }
+        .tabViewStyle(PageTabViewStyle())
+        .clipShape(RoundedRectangle(cornerRadius: 5))
+        .frame(maxWidth: .infinity, minHeight: 300)
+        .onReceive(vm.timer) { _ in
+            withAnimation(.easeOut) {
+                vm.addToCurrentIndex()
+            }
+        }
+    }
+    
     @ViewBuilder
     private func logo() -> some View {
         HStack(spacing: 8){
@@ -48,9 +75,8 @@ struct MovieListView: View {
                 .font(.title2)
                 .bold()
         }
-        .padding(.bottom, 8)
     }
-
+    
     @ViewBuilder
     private func horizontalGrid() -> some View {
         ScrollView(.horizontal){
@@ -64,7 +90,7 @@ struct MovieListView: View {
             }
         }
     }
-
+    
     @ViewBuilder
     private func verticalGrid() -> some View {
         LazyVGrid(columns: vm.columns, spacing: 20) {
@@ -76,7 +102,7 @@ struct MovieListView: View {
             }
         }
     }
-
+    
     @ViewBuilder
     private func image(path: String) -> some View {
         AsyncImage(url: URL(string: "\(vm.imageUrl)\(path )")) {
@@ -86,7 +112,7 @@ struct MovieListView: View {
             ProgressView()
         }
     }
-
+    
     struct TextCategories: ViewModifier {
         let font = Font.system(size: 24).weight(.semibold)
         func body(content: Content) -> some View {

@@ -15,8 +15,10 @@ import SwiftUI
 
 
 class MovieListViewModel: ObservableObject {
-    @Published var popularMovieSList = [Result]()
-    @Published var upcomingMovies = [Result]()
+    @Published private(set) var popularMovieSList = [Result]()
+    @Published private(set) var upcomingMovies = [Result]()
+    @Published private(set) var timer = Timer.publish(every: 3, on: .main, in: .common).autoconnect()
+    @Published var currentIndex = 0
     let imageUrl = "https://image.tmdb.org/t/p/w500/"
     private var isLoading = false
     private var error: Error?
@@ -44,6 +46,10 @@ class MovieListViewModel: ObservableObject {
         fetchData(publisher: repository.getUpcomingMovies()) { [weak self] movies in
             self?.upcomingMovies = movies
         }
+    }
+
+    func addToCurrentIndex() {
+        currentIndex = currentIndex < upcomingMovies.count - 1 ? currentIndex + 1 : 0
     }
 
     private func fetchData(publisher: AnyPublisher<MovieList, ResultError>, assignResults: @escaping ([Result]) -> Void) {
