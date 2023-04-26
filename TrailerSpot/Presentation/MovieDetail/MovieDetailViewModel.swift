@@ -16,7 +16,7 @@ class MovieDetailViewModel: ObservableObject {
 
     @Published var showFullDescription : Bool = false
     @Published var progressValue: Double = 0.0
-    @Published var trailerList = [TrailerResult]()
+    @Published private(set) var trailerList = [TrailerResult]()
 
     let posterPath = "https://image.tmdb.org/t/p/w500/"
     private let repository: MovieRepository

@@ -62,7 +62,7 @@ struct MovieListView: View {
         }
         .tabViewStyle(PageTabViewStyle())
         .clipShape(RoundedRectangle(cornerRadius: 5))
-        .frame(maxWidth: .infinity, minHeight: 300)
+        .frame(maxWidth: .infinity, minHeight: 250)
         .onReceive(vm.timer) { _ in
             withAnimation(.easeOut) {
                 vm.addToCurrentIndex()
