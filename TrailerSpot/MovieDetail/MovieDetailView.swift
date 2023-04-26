@@ -25,14 +25,12 @@ struct MovieDetailView: View {
                 }
                 expandableText()
                 trailerWindow()
-                    .frame(minWidth: 0, maxWidth: .infinity, minHeight: 200, maxHeight: 300)
+
             }
             .padding(16)
             .onAppear {
-                Task {
-                    vm.ratingSet(voteAverage: movie.voteAverage)
-                    vm.fetchTrailers(id: movie.id)
-                }
+                vm.ratingSet(voteAverage: movie.voteAverage)
+                vm.fetchTrailers(id: movie.id)
             }
         }
     }
@@ -41,7 +39,8 @@ struct MovieDetailView: View {
     private func trailerWindow() -> some View {
         if let video = vm.trailerList.first?.youtubeURL {
             YouTubeWebView(url: video.absoluteString)
-                .cornerRadius(12)
+                .frame(minWidth: 0, maxWidth: .infinity, minHeight: 250, maxHeight: 400)
+                .cornerRadius(10)
         } else {
             Text("Trailer not available")
                 .foregroundColor(.red)

@@ -19,8 +19,8 @@ struct YouTubeWebView: UIViewRepresentable {
     }
     
     func updateUIView(_ uiView: UIViewType, context: Context) {
-        guard let yotubeURL = URL(string: url)  else {return}
+        guard let youtubeURL = URL(string: url)  else {return}
         uiView.scrollView.isScrollEnabled = false
-        uiView.load(URLRequest(url: yotubeURL))
+        uiView.load(URLRequest(url: youtubeURL))
     }
 }
