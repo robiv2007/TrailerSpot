@@ -50,7 +50,12 @@ struct MovieListView: View {
                 ZStack(alignment: .topTrailing) {
                     image(path: vm.upcomingMovies[index].backDropPath)
                         .tag(index)
-                        .font(.title)
+                    Text(vm.upcomingMovies[index].title)
+                        .padding(8)
+                        .font(.subheadline)
+                        .background(.thickMaterial)
+                        .foregroundColor(.white)
+                        .cornerRadius(5)
                         .fontWeight(.bold)
                 }
             }

@@ -14,29 +14,51 @@ struct MovieDetailView: View {
     
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading, spacing: 24) {
+            VStack(alignment: .leading, spacing: 16) {
                 ZStack(alignment: .bottomTrailing) {
                     image(path: movie.backDropPath)
-                    RatingView(progress: $vm.progressValue,
-                               color: vm.voteAverageColor,
-                               rating: movie.voteAverage)
-                    .frame(width: 40)
-                    .padding(8)
+                    VStack(spacing: 0) {
+                        RatingView(progress: $vm.progressValue,
+                                   color: vm.voteAverageColor,
+                                   rating: movie.voteAverage)
+                        .frame(width: 40)
+                        Text("\(movie.voteCount) Votes")
+                            .foregroundColor(.white)
+                            .font(.caption)
+                            .fontWeight(.bold)
+                            .padding(8)
+                    }
                 }
+                titleAndReleaseDate()
                 expandableText()
                 trailerWindow()
 
             }
-            .padding(16)
+            .padding(8)
             .onAppear {
                 vm.ratingSet(voteAverage: movie.voteAverage)
                 vm.fetchTrailers(id: movie.id)
             }
         }
     }
+
+    @ViewBuilder
+    private func titleAndReleaseDate() -> some View {
+        VStack(alignment: .leading, spacing: 0) {
+            Text(movie.title)
+                .font(.title)
+                .fontWeight(.bold)
+                .foregroundColor(.orange)
+            Text("Release Date \(movie.releaseDate)")
+                .foregroundColor(.secondary)
+        }
+    }
     
     @ViewBuilder
     private func trailerWindow() -> some View {
+        Text("Trailer")
+            .font(.headline)
+            .foregroundColor(.orange)
         if let video = vm.trailerList.first?.youtubeURL {
             YouTubeWebView(url: video.absoluteString)
                 .frame(minWidth: 0, maxWidth: .infinity, minHeight: 250, maxHeight: 400)
@@ -50,6 +72,9 @@ struct MovieDetailView: View {
     @ViewBuilder
     private func expandableText() -> some View {
         VStack(alignment: .leading, spacing: 8){
+            Text("About the movie:")
+                .fontWeight(.bold)
+                .foregroundColor(.orange)
             Text(movie.overview)
                 .lineLimit(vm.showFullDescription ? nil : 2)
                 .foregroundColor(.secondary)
@@ -63,6 +88,7 @@ struct MovieDetailView: View {
             })
         }
         .font(.subheadline)
+        .padding(.bottom, 16)
     }
     
     @ViewBuilder
