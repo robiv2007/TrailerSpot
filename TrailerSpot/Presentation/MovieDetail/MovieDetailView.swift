@@ -38,6 +38,7 @@ struct MovieDetailView: View {
             .onAppear {
                 vm.ratingSet(voteAverage: movie.voteAverage)
                 vm.fetchTrailers(id: movie.id)
+                vm.fetchCast(id: movie.id)
             }
         }
     }
