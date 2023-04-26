@@ -20,12 +20,12 @@ struct MovieListView: View {
                     carouselWithImages()
 
                     Text("Upcoming Movies")
-                        .modifier(TextCategories())
+                        .modifier(RoundedRectangleModifier())
 
                     horizontalGrid()
 
                     Text("Popular")
-                        .modifier(TextCategories())
+                        .modifier(RoundedRectangleModifier())
 
                     verticalGrid()
                         .onAppear {
@@ -73,6 +73,7 @@ struct MovieListView: View {
                 .frame(width: 45, height: 45)
             Text("Trailer Spot")
                 .font(.title2)
+                .foregroundColor(.orange)
                 .bold()
         }
     }
@@ -110,18 +111,6 @@ struct MovieListView: View {
                 .cornerRadius(10)
         }placeholder: {
             ProgressView()
-        }
-    }
-    
-    struct TextCategories: ViewModifier {
-        let font = Font.system(size: 24).weight(.semibold)
-        func body(content: Content) -> some View {
-            content
-                .font(font)
-                .padding()
-                .frame(maxWidth: .infinity, maxHeight: 40, alignment: .leading)
-                .background(.thinMaterial)
-                .cornerRadius(50)
         }
     }
 }
