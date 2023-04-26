@@ -95,6 +95,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B3200AFC29F91839004C1C98 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				B33F64E129F6AA5A0097C011 /* RatingView.swift */,
+				B322A9E929F7D788003207F4 /* YouTubeWebView */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		B3200AFD29F9194E004C1C98 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				B33F64DA29F005A00097C011 /* MovieList */,
+				B33F64DB29F005D20097C011 /* MovieDetail */,
+				B3200AFC29F91839004C1C98 /* Components */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
 		B322A9E929F7D788003207F4 /* YouTubeWebView */ = {
 			isa = PBXGroup;
 			children = (
@@ -164,14 +183,11 @@
 		B35895BE29E94DFD00DE4F05 /* TrailerSpot */ = {
 			isa = PBXGroup;
 			children = (
-				B322A9E929F7D788003207F4 /* YouTubeWebView */,
-				B33F64DB29F005D20097C011 /* MovieDetail */,
-				B33F64DA29F005A00097C011 /* MovieList */,
+				B3200AFD29F9194E004C1C98 /* Presentation */,
 				B33F64D129EFF3DB0097C011 /* AppNavigation */,
 				B35895BF29E94DFD00DE4F05 /* TrailerSpotApp.swift */,
 				B35895C329E94DFD00DE4F05 /* Assets.xcassets */,
 				B35895C529E94DFD00DE4F05 /* Preview Content */,
-				B33F64E129F6AA5A0097C011 /* RatingView.swift */,
 			);
 			path = TrailerSpot;
 			sourceTree = "<group>";
