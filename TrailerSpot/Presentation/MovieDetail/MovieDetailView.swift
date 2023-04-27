@@ -17,6 +17,7 @@ struct MovieDetailView: View {
             VStack(alignment: .leading, spacing: 16) {
                 ZStack(alignment: .bottomTrailing) {
                     image(path: movie.backDropPath)
+                        .frame(maxWidth: .infinity, maxHeight: 450)
                     VStack(spacing: 0) {
                         RatingView(progress: $vm.progressValue,
                                    color: vm.voteAverageColor,
@@ -30,6 +31,8 @@ struct MovieDetailView: View {
                     }
                 }
                 titleAndReleaseDate()
+                Text("Cast")
+                castImageHorizontalScroll()
                 expandableText()
                 trailerWindow()
 
@@ -41,6 +44,25 @@ struct MovieDetailView: View {
                 vm.fetchCast(id: movie.id)
             }
         }
+    }
+
+    @ViewBuilder
+    private func castImageHorizontalScroll() -> some View {
+        ScrollView(.horizontal) {
+            HStack(alignment: .top, spacing: 8) {
+                ForEach(vm.castList, id: \.id) { item in
+                    VStack(spacing: 16) {
+                        image(path: item.profilePath ?? "")
+                            .frame(width: 100, height: 140)
+                        Text(item.name ?? "Unknown" )
+                            .font(.footnote)
+                            .frame(width: 100)
+                            .lineLimit(2)
+                    }
+                }
+            }
+        }
+        .scrollIndicators(.hidden)
     }
 
     @ViewBuilder
@@ -101,7 +123,6 @@ struct MovieDetailView: View {
         }placeholder: {
             ProgressView()
         }
-        .frame(maxWidth: .infinity, maxHeight: 450)
     }
 }
 
