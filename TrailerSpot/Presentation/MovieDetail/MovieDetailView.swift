@@ -10,7 +10,7 @@ import Model
 
 struct MovieDetailView: View {
     @StateObject var vm = MovieDetailViewModel()
-    let movie: Result
+    let movie: Movie
     
     var body: some View {
         ScrollView {
@@ -18,17 +18,7 @@ struct MovieDetailView: View {
                 ZStack(alignment: .bottomTrailing) {
                     image(path: movie.backDropPath)
                         .frame(maxWidth: .infinity, maxHeight: 450)
-                    VStack(spacing: 0) {
-                        RatingView(progress: $vm.progressValue,
-                                   color: vm.voteAverageColor,
-                                   rating: movie.voteAverage)
-                        .frame(width: 40)
-                        Text("\(movie.voteCount) Votes")
-                            .foregroundColor(.white)
-                            .font(.caption)
-                            .fontWeight(.bold)
-                            .padding(8)
-                    }
+                    ratingCircleView()
                 }
                 titleAndReleaseDate()
                 Text("Cast")
@@ -43,6 +33,21 @@ struct MovieDetailView: View {
                 vm.fetchTrailers(id: movie.id)
                 vm.fetchCast(id: movie.id)
             }
+        }
+    }
+
+    @ViewBuilder
+    private func ratingCircleView() -> some View {
+        VStack(spacing: 0) {
+            RatingView(progress: $vm.progressValue,
+                       color: vm.voteAverageColor,
+                       rating: movie.voteAverage)
+            .frame(width: 40)
+            Text("\(movie.voteCount) Votes")
+                .foregroundColor(.white)
+                .font(.caption)
+                .fontWeight(.bold)
+                .padding(8)
         }
     }
 
@@ -128,6 +133,6 @@ struct MovieDetailView: View {
 
 struct MovieDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        MovieDetailView(movie: Result.mockMovie)
+        MovieDetailView(movie: Movie.mockMovie)
     }
 }

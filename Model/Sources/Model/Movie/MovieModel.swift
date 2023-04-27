@@ -5,7 +5,7 @@
 //  Created by vatran robert on 2023-04-14.
 //
 
-public struct Result: Codable, Identifiable {
+public struct Movie: Codable, Identifiable {
     
     public let adult: Bool
     public let genreIDS: [Int]
@@ -34,8 +34,8 @@ public struct Result: Codable, Identifiable {
         case backDropPath = "backdrop_path"
     }
     
-    static public var mockMovie : Result
-    {Result(adult: false, genreIDS: [], id: 1, originalLanguage: "Eng", originalTitle: "Harry ", overview: "", popularity: 0.0, posterPath: "/hR1jdCw0A9czgsbp45TASkjjBhA.jpg", releaseDate: "", title: "Harry", video: true, voteAverage: 6.0, voteCount: 1, backDropPath: "/lWqjXgut48IK5f5IRbDBAoO2Epp.jpg")}
+    static public var mockMovie : Movie
+    {Movie(adult: false, genreIDS: [], id: 1, originalLanguage: "Eng", originalTitle: "Harry ", overview: "", popularity: 0.0, posterPath: "/hR1jdCw0A9czgsbp45TASkjjBhA.jpg", releaseDate: "", title: "Harry", video: true, voteAverage: 6.0, voteCount: 1, backDropPath: "/lWqjXgut48IK5f5IRbDBAoO2Epp.jpg")}
 }
 
 
