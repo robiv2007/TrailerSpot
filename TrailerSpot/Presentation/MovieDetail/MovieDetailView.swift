@@ -21,7 +21,7 @@ struct MovieDetailView: View {
                     ratingCircleView()
                 }
                 titleAndReleaseDate()
-                Text("Cast")
+                vm.castList.isEmpty ? Text("") : Text("Cast")
                 castImageHorizontalScroll()
                 expandableText()
                 trailerWindow()
@@ -59,7 +59,7 @@ struct MovieDetailView: View {
                     VStack(spacing: 16) {
                         image(path: item.profilePath ?? "")
                             .frame(width: 100, height: 140)
-                        Text(item.name ?? "Unknown" )
+                        Text(item.name)
                             .font(.footnote)
                             .frame(width: 100)
                             .lineLimit(2)

@@ -25,6 +25,8 @@
 		B35895D129E94DFE00DE4F05 /* TrailerSpotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35895D029E94DFE00DE4F05 /* TrailerSpotTests.swift */; };
 		B35895DB29E94DFE00DE4F05 /* TrailerSpotUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35895DA29E94DFE00DE4F05 /* TrailerSpotUITests.swift */; };
 		B35895DD29E94DFE00DE4F05 /* TrailerSpotUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35895DC29E94DFE00DE4F05 /* TrailerSpotUITestsLaunchTests.swift */; };
+		B3AF899A29FA8E600089C7FB /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AF899929FA8E600089C7FB /* TabBarView.swift */; };
+		B3AF899C29FA8EA20089C7FB /* TabBarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AF899B29FA8EA20089C7FB /* TabBarViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +68,8 @@
 		B35895EE29E9537F00DE4F05 /* Model */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Model; sourceTree = "<group>"; };
 		B35895EF29E9539700DE4F05 /* Navigation */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Navigation; sourceTree = "<group>"; };
 		B35895F029E953BF00DE4F05 /* Domain */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Domain; sourceTree = "<group>"; };
+		B3AF899929FA8E600089C7FB /* TabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
+		B3AF899B29FA8EA20089C7FB /* TabBarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +113,7 @@
 		B3200AFD29F9194E004C1C98 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				B3AF899829FA8E450089C7FB /* TabBar */,
 				B33F64DA29F005A00097C011 /* MovieList */,
 				B33F64DB29F005D20097C011 /* MovieDetail */,
 				B3200AFC29F91839004C1C98 /* Components */,
@@ -226,6 +231,15 @@
 				B35895DC29E94DFE00DE4F05 /* TrailerSpotUITestsLaunchTests.swift */,
 			);
 			path = TrailerSpotUITests;
+			sourceTree = "<group>";
+		};
+		B3AF899829FA8E450089C7FB /* TabBar */ = {
+			isa = PBXGroup;
+			children = (
+				B3AF899929FA8E600089C7FB /* TabBarView.swift */,
+				B3AF899B29FA8EA20089C7FB /* TabBarViewModel.swift */,
+			);
+			path = TabBar;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -364,6 +378,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B3AF899A29FA8E600089C7FB /* TabBarView.swift in Sources */,
 				B33F64DD29F005F00097C011 /* MovieDetailView.swift in Sources */,
 				B35895C229E94DFD00DE4F05 /* MovieListView.swift in Sources */,
 				B35895C029E94DFD00DE4F05 /* TrailerSpotApp.swift in Sources */,
@@ -372,6 +387,7 @@
 				B33F64D029EE8F020097C011 /* MovieListViewModel.swift in Sources */,
 				B322A9EB29F7D7AA003207F4 /* YouTubeWebView.swift in Sources */,
 				B33F64E429F6B1600097C011 /* MovieDetailViewModel.swift in Sources */,
+				B3AF899C29FA8EA20089C7FB /* TabBarViewModel.swift in Sources */,
 				B33F64D329EFF3F90097C011 /* AppDestinationViewer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
