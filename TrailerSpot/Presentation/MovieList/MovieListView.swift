@@ -13,6 +13,7 @@ struct MovieListView: View {
     @StateObject var vm = MovieListViewModel()
 
     var body: some View {
+        NavigationView {
         VStack(alignment: .leading, spacing: 16) {
             logo()
             ScrollView() {
@@ -42,7 +43,9 @@ struct MovieListView: View {
         .preferredColorScheme(.dark)
         .padding(.horizontal, 8)
     }
-    
+
+    }
+
     @ViewBuilder
     private func carouselWithImages() -> some View {
         TabView(selection: $vm.currentIndex){
@@ -69,7 +72,7 @@ struct MovieListView: View {
             }
         }
     }
-    
+
     @ViewBuilder
     private func logo() -> some View {
         HStack(spacing: 8){
@@ -82,7 +85,7 @@ struct MovieListView: View {
                 .bold()
         }
     }
-    
+
     @ViewBuilder
     private func horizontalGrid() -> some View {
         ScrollView(.horizontal){
@@ -96,7 +99,7 @@ struct MovieListView: View {
             }
         }
     }
-    
+
     @ViewBuilder
     private func verticalGrid() -> some View {
         LazyVGrid(columns: vm.columns, spacing: 20) {
@@ -108,7 +111,7 @@ struct MovieListView: View {
             }
         }
     }
-    
+
     @ViewBuilder
     private func image(path: String) -> some View {
         AsyncImage(url: URL(string: "\(vm.imageUrl)\(path )")) {
