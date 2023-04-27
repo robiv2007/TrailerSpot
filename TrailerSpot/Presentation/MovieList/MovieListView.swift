@@ -14,35 +14,35 @@ struct MovieListView: View {
 
     var body: some View {
         NavigationView {
-        VStack(alignment: .leading, spacing: 16) {
-            logo()
-            ScrollView() {
-                VStack(alignment: .leading, spacing: 16) {
-                    carouselWithImages()
+            VStack(alignment: .leading, spacing: 16) {
+                logo()
+                ScrollView() {
+                    VStack(alignment: .leading, spacing: 16) {
+                        carouselWithImages()
 
-                    Text("Upcoming Movies")
-                        .modifier(RoundedRectangleModifier())
+                        Text("Upcoming Movies")
+                            .modifier(RoundedRectangleModifier())
 
-                    horizontalGrid()
+                        horizontalGrid()
 
-                    Text("Popular")
-                        .modifier(RoundedRectangleModifier())
+                        Text("Popular")
+                            .modifier(RoundedRectangleModifier())
 
-                    verticalGrid()
-                        .onAppear {
-                            vm.fetchMovies()
-                            vm.fetchUpcomingMovies()
-                        }
+                        verticalGrid()
+                            .onAppear {
+                                vm.fetchMovies()
+                                vm.fetchUpcomingMovies()
+                            }
+                    }
+                    .font(.title)
+                    .foregroundColor(.orange)
+
                 }
-                .font(.title)
-                .foregroundColor(.orange)
-
+                .scrollIndicators(.hidden)
             }
-            .scrollIndicators(.hidden)
+            .preferredColorScheme(.dark)
+            .padding(.horizontal, 8)
         }
-        .preferredColorScheme(.dark)
-        .padding(.horizontal, 8)
-    }
 
     }
 
