@@ -60,7 +60,7 @@ class MovieDetailViewModel: ObservableObject {
                     print("Finished")
                 }
             } receiveValue: { trailer in
-                assignResults(trailer.videos.results.filter({$0.name == "Official Trailer" && $0.official == true || $0.official == false}))
+                assignResults(trailer.videos.results.filter({$0.name == "Official Trailer" || $0.official == true || $0.official == false}))
                 print("Movies \(trailer)")
             }
             .store(in: &cancellables)

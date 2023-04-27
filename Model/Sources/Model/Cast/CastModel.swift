@@ -14,8 +14,8 @@ public struct MovieCast: Codable {
 
 public struct Cast: Codable {
     public let adult: Bool
-    public let gender, id: Int
-    public let knownForDepartment: KnownForDepartment
+    public let gender, id: Int?
+    public let knownForDepartment: String?
     public let name: String
     public let originalName: String?
     public let popularity: Double
@@ -38,8 +38,4 @@ public struct Cast: Codable {
         case creditID = "credit_id"
         case order, department, job
     }
-}
-
-public enum KnownForDepartment: String, Codable {
-    case acting = "Acting"
 }
