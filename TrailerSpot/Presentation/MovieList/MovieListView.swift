@@ -20,12 +20,12 @@ struct MovieListView: View {
                     carouselWithImages()
 
                     Text("Upcoming Movies")
-                        .modifier(TextCategories())
+                        .modifier(RoundedRectangleModifier())
 
                     horizontalGrid()
 
                     Text("Popular")
-                        .modifier(TextCategories())
+                        .modifier(RoundedRectangleModifier())
 
                     verticalGrid()
                         .onAppear {
@@ -50,14 +50,19 @@ struct MovieListView: View {
                 ZStack(alignment: .topTrailing) {
                     image(path: vm.upcomingMovies[index].backDropPath)
                         .tag(index)
-                        .font(.title)
+                    Text(vm.upcomingMovies[index].title)
+                        .padding(8)
+                        .font(.subheadline)
+                        .background(.thickMaterial)
+                        .foregroundColor(.white)
+                        .cornerRadius(5)
                         .fontWeight(.bold)
                 }
             }
         }
         .tabViewStyle(PageTabViewStyle())
         .clipShape(RoundedRectangle(cornerRadius: 5))
-        .frame(maxWidth: .infinity, minHeight: 300)
+        .frame(maxWidth: .infinity, minHeight: 250)
         .onReceive(vm.timer) { _ in
             withAnimation(.easeOut) {
                 vm.addToCurrentIndex()
@@ -73,6 +78,7 @@ struct MovieListView: View {
                 .frame(width: 45, height: 45)
             Text("Trailer Spot")
                 .font(.title2)
+                .foregroundColor(.orange)
                 .bold()
         }
     }
@@ -110,18 +116,6 @@ struct MovieListView: View {
                 .cornerRadius(10)
         }placeholder: {
             ProgressView()
-        }
-    }
-    
-    struct TextCategories: ViewModifier {
-        let font = Font.system(size: 24).weight(.semibold)
-        func body(content: Content) -> some View {
-            content
-                .font(font)
-                .padding()
-                .frame(maxWidth: .infinity, maxHeight: 40, alignment: .leading)
-                .background(.thinMaterial)
-                .cornerRadius(50)
         }
     }
 }

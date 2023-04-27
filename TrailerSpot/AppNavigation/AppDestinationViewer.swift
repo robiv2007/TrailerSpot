@@ -9,6 +9,7 @@ import Foundation
 import Navigation
 import SwiftUI
 
+// TODO: Implement the navigation
 class AppDestinationViewer: DestinationViewer<Destination> {
     @ViewBuilder
     override func view(for destination: Destination) -> any View {
