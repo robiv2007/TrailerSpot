@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct TrailerResult: Codable,Identifiable {
+public struct Trailer: Codable,Identifiable {
     public let name, key: String
     public let site: String
     public let official: Bool

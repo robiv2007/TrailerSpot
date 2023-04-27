@@ -16,7 +16,7 @@ class MovieDetailViewModel: ObservableObject {
     
     @Published var showFullDescription : Bool = false
     @Published var progressValue: Double = 0.0
-    @Published private(set) var trailerList = [TrailerResult]()
+    @Published private(set) var trailerList = [Trailer]()
     @Published var castList = [Cast]()
     
     let posterPath = "https://image.tmdb.org/t/p/w500/"
@@ -46,7 +46,7 @@ class MovieDetailViewModel: ObservableObject {
         }
     }
     
-    private func fetchData(publisher: AnyPublisher<MovieDetails, ResultError>, assignResults: @escaping ([TrailerResult]) -> Void) {
+    private func fetchData(publisher: AnyPublisher<MovieDetails, ResultError>, assignResults: @escaping ([Trailer]) -> Void) {
         isLoading = true
         publisher
             .receive(on: DispatchQueue.main)
