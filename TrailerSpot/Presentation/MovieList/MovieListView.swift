@@ -51,7 +51,7 @@ struct MovieListView: View {
         TabView(selection: $vm.currentIndex){
             ForEach(vm.upcomingMovies.indices, id: \.self) { index in
                 ZStack(alignment: .topTrailing) {
-                    image(path: vm.upcomingMovies[index].backDropPath)
+                    image(path: vm.upcomingMovies[index].backDropPath, title: vm.upcomingMovies[index].title)
                         .tag(index)
                     Text(vm.upcomingMovies[index].title)
                         .padding(8)
@@ -92,8 +92,10 @@ struct MovieListView: View {
             LazyHGrid(rows: vm.rows, spacing: 20){
                 ForEach(vm.upcomingMovies, id: \.id){ item in
                     NavigationLink(destination: MovieDetailView(movie: item)){
-                        image(path: item.posterPath)
-                            .frame(width: 200, height: 300)
+                        image(path: item.posterPath,
+                              title: item.title
+                        )
+                        .frame(width: 200, height: 300)
                     }
                 }
             }
@@ -105,7 +107,8 @@ struct MovieListView: View {
         LazyVGrid(columns: vm.columns, spacing: 20) {
             ForEach(vm.popularMovieSList, id: \.id) { movie in
                 NavigationLink(destination: MovieDetailView(movie: movie)) {
-                    image(path: movie.posterPath)
+                    image(path: movie.posterPath,
+                          title: movie.title)
                         .frame(width: 120, height: 180)
                 }
             }
@@ -113,12 +116,16 @@ struct MovieListView: View {
     }
 
     @ViewBuilder
-    private func image(path: String) -> some View {
-        AsyncImage(url: URL(string: "\(vm.imageUrl)\(path )")) {
+    private func image(path: String, title: String) -> some View {
+        AsyncImage(url: URL(string: "\(vm.imageUrl)\(path)")) {
             $0.resizable()
                 .cornerRadius(10)
-        }placeholder: {
-            ProgressView()
+        } placeholder: {
+            VStack {
+                Text(title)
+                    .font(.subheadline)
+                ProgressView()
+            }
         }
     }
 }

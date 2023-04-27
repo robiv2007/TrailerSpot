@@ -34,6 +34,7 @@ struct MovieDetailView: View {
                 vm.fetchCast(id: movie.id)
             }
         }
+        .scrollIndicators(.hidden)
     }
 
     @ViewBuilder
@@ -125,9 +126,10 @@ struct MovieDetailView: View {
             $0.resizable()
                 .scaledToFill()
                 .cornerRadius(10)
-        }placeholder: {
-            ProgressView()
+        } placeholder: {
+            Text("Image not available")
         }
+
     }
 }
 
