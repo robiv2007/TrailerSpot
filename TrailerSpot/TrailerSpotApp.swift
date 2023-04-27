@@ -12,7 +12,7 @@ struct TrailerSpotApp: App {
     var body: some Scene {
         WindowGroup {
             NavigationStack {
-                MovieListView()
+                RootView()
             }
         }
     }

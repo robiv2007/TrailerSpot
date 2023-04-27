@@ -16,7 +16,8 @@ public struct Cast: Codable {
     public let adult: Bool
     public let gender, id: Int
     public let knownForDepartment: KnownForDepartment
-    public let name, originalName: String?
+    public let name: String
+    public let originalName: String?
     public let popularity: Double
     public let profilePath: String?
     public let castID: Int?

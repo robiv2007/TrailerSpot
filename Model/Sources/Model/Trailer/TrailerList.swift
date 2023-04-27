@@ -8,5 +8,5 @@
 import Foundation
 
 public struct TrailerList: Codable {
-    public let results: [TrailerResult]
+    public let results: [Trailer]
 }

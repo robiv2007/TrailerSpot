@@ -9,7 +9,7 @@ import Foundation
 
 public struct MovieList: Codable {
     public let page: Int
-    public let results: [Result]
+    public let results: [Movie]
 }
 
 public enum ResultError: Error {

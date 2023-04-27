@@ -13,36 +13,39 @@ struct MovieListView: View {
     @StateObject var vm = MovieListViewModel()
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 16) {
-            logo()
-            ScrollView() {
-                VStack(alignment: .leading, spacing: 16) {
-                    carouselWithImages()
+        NavigationView {
+            VStack(alignment: .leading, spacing: 16) {
+                logo()
+                ScrollView() {
+                    VStack(alignment: .leading, spacing: 16) {
+                        carouselWithImages()
 
-                    Text("Upcoming Movies")
-                        .modifier(RoundedRectangleModifier())
+                        Text("Upcoming Movies")
+                            .modifier(RoundedRectangleModifier())
 
-                    horizontalGrid()
+                        horizontalGrid()
 
-                    Text("Popular")
-                        .modifier(RoundedRectangleModifier())
+                        Text("Popular")
+                            .modifier(RoundedRectangleModifier())
 
-                    verticalGrid()
-                        .onAppear {
-                            vm.fetchMovies()
-                            vm.fetchUpcomingMovies()
-                        }
+                        verticalGrid()
+                            .onAppear {
+                                vm.fetchMovies()
+                                vm.fetchUpcomingMovies()
+                            }
+                    }
+                    .font(.title)
+                    .foregroundColor(.orange)
+
                 }
-                .font(.title)
-                .foregroundColor(.orange)
-
+                .scrollIndicators(.hidden)
             }
-            .scrollIndicators(.hidden)
+            .preferredColorScheme(.dark)
+            .padding(.horizontal, 8)
         }
-        .preferredColorScheme(.dark)
-        .padding(.horizontal, 8)
+
     }
-    
+
     @ViewBuilder
     private func carouselWithImages() -> some View {
         TabView(selection: $vm.currentIndex){
@@ -69,7 +72,7 @@ struct MovieListView: View {
             }
         }
     }
-    
+
     @ViewBuilder
     private func logo() -> some View {
         HStack(spacing: 8){
@@ -82,7 +85,7 @@ struct MovieListView: View {
                 .bold()
         }
     }
-    
+
     @ViewBuilder
     private func horizontalGrid() -> some View {
         ScrollView(.horizontal){
@@ -96,7 +99,7 @@ struct MovieListView: View {
             }
         }
     }
-    
+
     @ViewBuilder
     private func verticalGrid() -> some View {
         LazyVGrid(columns: vm.columns, spacing: 20) {
@@ -108,7 +111,7 @@ struct MovieListView: View {
             }
         }
     }
-    
+
     @ViewBuilder
     private func image(path: String) -> some View {
         AsyncImage(url: URL(string: "\(vm.imageUrl)\(path )")) {

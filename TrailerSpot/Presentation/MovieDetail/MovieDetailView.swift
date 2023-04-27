@@ -10,7 +10,7 @@ import Model
 
 struct MovieDetailView: View {
     @StateObject var vm = MovieDetailViewModel()
-    let movie: Result
+    let movie: Movie
     
     var body: some View {
         ScrollView {
@@ -18,20 +18,10 @@ struct MovieDetailView: View {
                 ZStack(alignment: .bottomTrailing) {
                     image(path: movie.backDropPath)
                         .frame(maxWidth: .infinity, maxHeight: 450)
-                    VStack(spacing: 0) {
-                        RatingView(progress: $vm.progressValue,
-                                   color: vm.voteAverageColor,
-                                   rating: movie.voteAverage)
-                        .frame(width: 40)
-                        Text("\(movie.voteCount) Votes")
-                            .foregroundColor(.white)
-                            .font(.caption)
-                            .fontWeight(.bold)
-                            .padding(8)
-                    }
+                    ratingCircleView()
                 }
                 titleAndReleaseDate()
-                Text("Cast")
+                vm.castList.isEmpty ? Text("") : Text("Cast")
                 castImageHorizontalScroll()
                 expandableText()
                 trailerWindow()
@@ -47,6 +37,21 @@ struct MovieDetailView: View {
     }
 
     @ViewBuilder
+    private func ratingCircleView() -> some View {
+        VStack(spacing: 0) {
+            RatingView(progress: $vm.progressValue,
+                       color: vm.voteAverageColor,
+                       rating: movie.voteAverage)
+            .frame(width: 40)
+            Text("\(movie.voteCount) Votes")
+                .foregroundColor(.white)
+                .font(.caption)
+                .fontWeight(.bold)
+                .padding(8)
+        }
+    }
+
+    @ViewBuilder
     private func castImageHorizontalScroll() -> some View {
         ScrollView(.horizontal) {
             HStack(alignment: .top, spacing: 8) {
@@ -54,7 +59,7 @@ struct MovieDetailView: View {
                     VStack(spacing: 16) {
                         image(path: item.profilePath ?? "")
                             .frame(width: 100, height: 140)
-                        Text(item.name ?? "Unknown" )
+                        Text(item.name)
                             .font(.footnote)
                             .frame(width: 100)
                             .lineLimit(2)
@@ -128,6 +133,6 @@ struct MovieDetailView: View {
 
 struct MovieDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        MovieDetailView(movie: Result.mockMovie)
+        MovieDetailView(movie: Movie.mockMovie)
     }
 }
