@@ -30,4 +30,8 @@ public class MovieRepositoryImpl: MovieRepository {
     public func getCast(id: Int) -> AnyPublisher<MovieCast, ResultError> {
         movieData.getCast(id: id)
     }
+
+    public func getSearchResult(searchText: String) -> AnyPublisher<MovieList, ResultError> {
+        movieData.getSearchResults(searchText: searchText)
+    }
 }

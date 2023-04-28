@@ -39,7 +39,4 @@ final class TabBarViewModel: ObservableObject {
             }
         }
     }
-
-
 }
-

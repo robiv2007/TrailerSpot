@@ -16,7 +16,7 @@ struct MovieDetailView: View {
         ScrollView {
             VStack(alignment: .leading, spacing: 16) {
                 ZStack(alignment: .bottomTrailing) {
-                    image(path: movie.backDropPath)
+                    image(path: movie.backDropPath ?? "")
                         .frame(maxWidth: .infinity, maxHeight: 450)
                     ratingCircleView()
                 }

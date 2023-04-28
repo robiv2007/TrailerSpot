@@ -51,7 +51,7 @@ struct MovieListView: View {
         TabView(selection: $vm.currentIndex){
             ForEach(vm.upcomingMovies.indices, id: \.self) { index in
                 ZStack(alignment: .topTrailing) {
-                    image(path: vm.upcomingMovies[index].backDropPath, title: vm.upcomingMovies[index].title)
+                    image(path: vm.upcomingMovies[index].backDropPath ?? "", title: vm.upcomingMovies[index].title)
                         .tag(index)
                     Text(vm.upcomingMovies[index].title)
                         .padding(8)
