@@ -10,23 +10,30 @@ import Data
 import Domain
 import Model
 import Foundation
+import SwiftUI
 
 class MovieSearchViewModel: ObservableObject {
 
     @Published var searchText = ""
     @Published var searchResultList: [Movie] = []
 
+    let imageUrl = "https://image.tmdb.org/t/p/w500/"
     private var isLoading = false
     private var error: Error?
     private let repository: MovieRepository
     private var cancellables = Set<AnyCancellable>()
+
+    let columns = [
+        GridItem(.adaptive(minimum: 120)),
+    ]
 
     init(repository: MovieRepository = MovieRepositoryImpl()) {
         self.repository = repository
     }
 
     func fetchSearchResult() {
-        fetchData(publisher: repository.getSearchResult(searchText: searchText)) { [weak self] movies in
+        let replaced = searchText.replacingOccurrences(of: " ", with: "%20")
+        fetchData(publisher: repository.getSearchResult(searchText: replaced)) { [weak self] movies in
             self?.searchResultList = movies
         }
     }

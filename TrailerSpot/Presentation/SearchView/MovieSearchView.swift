@@ -14,8 +14,40 @@ struct MovieSearchView: View {
     var body: some View {
         VStack {
             TextField("search movie", text: $vm.searchText)
+                .onChange(of: vm.searchText) { newValue in
+                        vm.fetchSearchResult()
+                }
                 .textFieldStyle(.roundedBorder)
-            Spacer()
+            ScrollView {
+                verticalGrid()
+            }
+        }
+    }
+
+    @ViewBuilder
+    private func verticalGrid() -> some View {
+        LazyVGrid(columns: vm.columns, spacing: 20) {
+            ForEach(vm.searchResultList, id: \.id) { movie in
+                NavigationLink(destination: MovieDetailView(movie: movie)) {
+                    image(path: movie.posterPath,
+                          title: movie.title)
+                        .frame(width: 120, height: 180)
+                }
+            }
+        }
+    }
+
+    @ViewBuilder
+    private func image(path: String, title: String) -> some View {
+        AsyncImage(url: URL(string: "\(vm.imageUrl)\(path)")) {
+            $0.resizable()
+                .cornerRadius(10)
+        } placeholder: {
+            VStack {
+                Text(title)
+                    .font(.subheadline)
+                ProgressView()
+            }
         }
     }
 }

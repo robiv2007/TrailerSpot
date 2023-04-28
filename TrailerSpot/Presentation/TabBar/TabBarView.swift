@@ -16,7 +16,6 @@ struct TabBarView: View {
                 view(for: vm.selectedTab)
                     .tabItem {
                         Label(tab.title, systemImage: tab.asset)
-                            .background(Color.white)
                     }
                     .tag(tab)
                     .frame(maxHeight: .infinity)
@@ -28,12 +27,10 @@ struct TabBarView: View {
     private func view(for tab: TabBarViewModel.Tab) -> some View {
         switch tab {
         case .home:
-
             MovieListView()
+
         case .search:
-            VStack {
-                Text("Search view")
-            }
+                MovieSearchView()
         }
     }
 }

@@ -13,7 +13,7 @@ public class MovieDataSource: MovieData {
     
     let apiKey = "ace7b669ec91ad7702878aa98fd99d60"
     let baseUrl = "https://api.themoviedb.org/3/movie/"
-    let baseUrlSearch = "https://api.themoviedb.org/3/search/movie"
+    let baseUrlSearch = "https://api.themoviedb.org/3/search/movie?"
     
     public init() {}
     
@@ -38,7 +38,7 @@ public class MovieDataSource: MovieData {
     }
 
     public func getSearchResults(searchText: String) -> AnyPublisher<MovieList, ResultError> {
-        let endpoint = "\(baseUrlSearch)?api_key=\(apiKey)&language=en-US&query=\(searchText)&page=1&include_adult=false"
+        let endpoint = "\(baseUrlSearch)api_key=\(apiKey)&language=en-US&query=\(searchText)&page=1&include_adult=false"
         return fetchData(from: endpoint, type: MovieList.self)
     }
 
