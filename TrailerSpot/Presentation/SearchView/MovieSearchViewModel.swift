@@ -16,6 +16,7 @@ class MovieSearchViewModel: ObservableObject {
 
     @Published var searchText = ""
     @Published var searchResultList: [Movie] = []
+    @Published var popularMoviesList: [Movie] = []
 
     let imageUrl = "https://image.tmdb.org/t/p/w500/"
     private var isLoading = false
@@ -35,6 +36,12 @@ class MovieSearchViewModel: ObservableObject {
         let replaced = searchText.replacingOccurrences(of: " ", with: "%20")
         fetchData(publisher: repository.getSearchResult(searchText: replaced)) { [weak self] movies in
             self?.searchResultList = movies
+        }
+    }
+
+    func fetchPopularMovies() {
+        fetchData(publisher: repository.getPopularMovies()) { [weak self] movies in
+            self?.popularMoviesList = movies
         }
     }
 

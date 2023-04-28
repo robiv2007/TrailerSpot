@@ -13,25 +13,29 @@ struct MovieSearchView: View {
 
     var body: some View {
         VStack {
-            TextField("search movie", text: $vm.searchText)
+            TextField("Search movies", text: $vm.searchText)
                 .onChange(of: vm.searchText) { newValue in
-                        vm.fetchSearchResult()
+                    vm.fetchSearchResult()
                 }
-                .textFieldStyle(.roundedBorder)
+                .padding()
+                .overlay(RoundedRectangle(cornerRadius: 10).stroke(lineWidth: 2))
+                .padding(.bottom, 16)
             ScrollView {
                 verticalGrid()
             }
         }
+        .padding(8)
+        .onAppear(perform: vm.fetchPopularMovies)
     }
 
     @ViewBuilder
     private func verticalGrid() -> some View {
         LazyVGrid(columns: vm.columns, spacing: 20) {
-            ForEach(vm.searchResultList, id: \.id) { movie in
+            ForEach(vm.searchResultList.isEmpty ? vm.popularMoviesList : vm.searchResultList, id: \.id) { movie in
                 NavigationLink(destination: MovieDetailView(movie: movie)) {
                     image(path: movie.posterPath,
                           title: movie.title)
-                        .frame(width: 120, height: 180)
+                    .frame(width: 120, height: 180)
                 }
             }
         }
