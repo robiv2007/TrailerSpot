@@ -35,38 +35,19 @@ class MovieDetailViewModel: ObservableObject {
     }
     
     func fetchTrailers(id: Int) {
-        fetchData(publisher: repository.getTrailers(id: id)) { [weak self] trailers in
-            self?.trailerList = trailers
-        }
+        fetch(publisher: repository.getTrailers(id: id), assignResults: { [weak self] trailers in
+            self?.trailerList = trailers.filter({$0.name == "Official Trailer" || $0.official })
+        }, filterResults: { $0.videos.results })
     }
-    
+
     func fetchCast(id: Int) {
-        fetchCast(publisher: repository.getCast(id: id)) { [weak self] cast in
+        fetch(publisher: repository.getCast(id: id), assignResults: { [weak self] cast in
             self?.castList = cast
-        }
+        }, filterResults: { $0.cast })
     }
-    
-    private func fetchData(publisher: AnyPublisher<MovieDetails, ResultError>, assignResults: @escaping ([Trailer]) -> Void) {
-        isLoading = true
-        publisher
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] completion in
-                self?.isLoading = false
-                switch completion {
-                case .failure(let error):
-                    self?.error = error
-                    print("Error \(error)")
-                case .finished:
-                    print("Finished")
-                }
-            } receiveValue: { trailer in
-                assignResults(trailer.videos.results.filter({$0.name == "Official Trailer" || $0.official == true || $0.official == false}))
-                print("Movies \(trailer)")
-            }
-            .store(in: &cancellables)
-    }
-    
-    private func fetchCast(publisher: AnyPublisher<MovieCast, ResultError>, assignResults: @escaping ([Cast]) -> Void) {
+
+
+    private func fetch<T, R>(publisher: AnyPublisher<T, ResultError>, assignResults: @escaping ([R]) -> Void, filterResults: @escaping (T) -> [R]) {
         isLoading = true
         publisher
             .receive(on: DispatchQueue.main)
@@ -80,12 +61,14 @@ class MovieDetailViewModel: ObservableObject {
                     print("Finished")
                 }
             } receiveValue: { item in
-                assignResults(item.cast)
-                print("Cast \(item)")
+                let results = filterResults(item)
+                assignResults(results)
+                print("\(T.self) \(item)")
             }
             .store(in: &cancellables)
     }
-    
+
+
     var voteAverageColor: Color {
         if progressValue <= 0.5 {
             return Color.red
