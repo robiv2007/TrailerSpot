@@ -37,7 +37,6 @@ public class MovieDataSource: MovieData {
         return fetchData(from: endpoint, type: MovieCast.self)
     }
 
-
     private func fetchData<T: Decodable>(from endpoint: String, type: T.Type) -> AnyPublisher<T, ResultError> {
         guard let url = URL(string: endpoint) else {
             return Fail(error: ResultError.resourceNotFound(endpoint)).eraseToAnyPublisher()

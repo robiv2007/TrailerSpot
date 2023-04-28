@@ -36,7 +36,6 @@ struct TabBarView: View {
             }
         }
     }
-
 }
 
 struct TabBarView_Previews: PreviewProvider {
