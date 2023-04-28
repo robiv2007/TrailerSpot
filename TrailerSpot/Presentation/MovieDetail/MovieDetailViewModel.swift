@@ -35,19 +35,19 @@ class MovieDetailViewModel: ObservableObject {
     }
     
     func fetchTrailers(id: Int) {
-        fetch(publisher: repository.getTrailers(id: id), assignResults: { [weak self] trailers in
+        fetchData(publisher: repository.getTrailers(id: id), assignResults: { [weak self] trailers in
             self?.trailerList = trailers.filter({$0.name == "Official Trailer" || $0.official })
         }, filterResults: { $0.videos.results })
     }
 
     func fetchCast(id: Int) {
-        fetch(publisher: repository.getCast(id: id), assignResults: { [weak self] cast in
+        fetchData(publisher: repository.getCast(id: id), assignResults: { [weak self] cast in
             self?.castList = cast
         }, filterResults: { $0.cast })
     }
 
 
-    private func fetch<T, R>(publisher: AnyPublisher<T, ResultError>, assignResults: @escaping ([R]) -> Void, filterResults: @escaping (T) -> [R]) {
+    private func fetchData<T, R>(publisher: AnyPublisher<T, ResultError>, assignResults: @escaping ([R]) -> Void, filterResults: @escaping (T) -> [R]) {
         isLoading = true
         publisher
             .receive(on: DispatchQueue.main)
