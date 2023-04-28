@@ -68,7 +68,6 @@ class MovieDetailViewModel: ObservableObject {
             .store(in: &cancellables)
     }
 
-
     var voteAverageColor: Color {
         if progressValue <= 0.5 {
             return Color.red
