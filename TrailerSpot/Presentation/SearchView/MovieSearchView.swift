@@ -13,10 +13,13 @@ struct MovieSearchView: View {
 
     var body: some View {
         VStack {
-            TextField("Search movies", text: $vm.searchText)
-                .onChange(of: vm.searchText) { newValue in
-                    vm.fetchSearchResult()
-                }
+            HStack(spacing: 8) {
+                Image(systemName: "magnifyingglass")
+                TextField("Search movies", text: $vm.searchText)
+                    .onChange(of: vm.searchText) { newValue in
+                        vm.fetchSearchResult()
+                    }
+            }
                 .padding()
                 .overlay(RoundedRectangle(cornerRadius: 10).stroke(lineWidth: 2))
                 .padding(.bottom, 16)
