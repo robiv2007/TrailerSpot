@@ -11,7 +11,7 @@ import Domain
 
 struct MovieListView: View {
     @StateObject var vm = MovieListViewModel()
-
+    
     var body: some View {
         NavigationView {
             VStack(alignment: .leading, spacing: 16) {
@@ -19,15 +19,15 @@ struct MovieListView: View {
                 ScrollView() {
                     VStack(alignment: .leading, spacing: 16) {
                         carouselWithImages()
-
+                        
                         Text("Upcoming Movies")
                             .modifier(RoundedRectangleModifier())
-
+                        
                         horizontalGrid()
-
+                        
                         Text("Popular")
                             .modifier(RoundedRectangleModifier())
-
+                        
                         verticalGrid()
                             .onAppear {
                                 vm.fetchMovies()
@@ -36,16 +36,45 @@ struct MovieListView: View {
                     }
                     .font(.title)
                     .foregroundColor(.orange)
-
+                    
+                    pageNumber()
                 }
                 .scrollIndicators(.hidden)
             }
             .preferredColorScheme(.dark)
             .padding(.horizontal, 8)
         }
-
     }
-
+    
+    @ViewBuilder
+    private func pageNumber() -> some View {
+        HStack(spacing: 16) {
+            Button {
+                vm.decrementPageNumber()
+            } label: {
+                HStack(spacing: 0) {
+                    Image(systemName: "chevron.left")
+                    Text("\(vm.pageNumber <= 1 ? vm.pageNumber : vm.pageNumber - 1 )")
+                }
+                .tint(.gray)
+            }
+            
+            Text("Page \(vm.pageNumber)")
+                .font(.title)
+                .foregroundColor(.orange)
+            
+            Button {
+                vm.incrementPageNumber()
+            } label: {
+                HStack(spacing: 0) {
+                    Text("\(vm.pageNumber + 1)")
+                    Image(systemName: "chevron.right")
+                }
+                .tint(.gray)
+            }
+        }
+    }
+    
     @ViewBuilder
     private func carouselWithImages() -> some View {
         TabView(selection: $vm.currentIndex){
@@ -72,7 +101,7 @@ struct MovieListView: View {
             }
         }
     }
-
+    
     @ViewBuilder
     private func logo() -> some View {
         HStack(spacing: 8){
@@ -85,7 +114,7 @@ struct MovieListView: View {
                 .bold()
         }
     }
-
+    
     @ViewBuilder
     private func horizontalGrid() -> some View {
         ScrollView(.horizontal){
@@ -101,7 +130,7 @@ struct MovieListView: View {
             }
         }
     }
-
+    
     @ViewBuilder
     private func verticalGrid() -> some View {
         LazyVGrid(columns: vm.columns, spacing: 20) {
@@ -109,12 +138,12 @@ struct MovieListView: View {
                 NavigationLink(destination: MovieDetailView(movie: movie)) {
                     image(path: movie.posterPath,
                           title: movie.title)
-                        .frame(width: 120, height: 180)
+                    .frame(width: 120, height: 180)
                 }
             }
         }
     }
-
+    
     @ViewBuilder
     private func image(path: String, title: String) -> some View {
         AsyncImage(url: URL(string: "\(vm.imageUrl)\(path)")) {

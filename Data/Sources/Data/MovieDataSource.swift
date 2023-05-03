@@ -17,8 +17,8 @@ public class MovieDataSource: MovieData {
     
     public init() {}
     
-    public func getPopularMovies() -> AnyPublisher<MovieList, ResultError> {
-        let endpoint = "\(baseUrl)popular?api_key=\(apiKey)&language=en-US"
+    public func getPopularMovies(pageNumber: Int) -> AnyPublisher<MovieList, ResultError> {
+        let endpoint = "\(baseUrl)popular?api_key=\(apiKey)&language=en-US&page=\(pageNumber)"
         return fetchData(from: endpoint, type: MovieList.self)
     }
     

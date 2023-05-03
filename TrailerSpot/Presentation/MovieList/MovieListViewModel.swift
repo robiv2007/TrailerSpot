@@ -18,12 +18,14 @@ class MovieListViewModel: ObservableObject {
     @Published private(set) var popularMovieSList = [Movie]()
     @Published private(set) var upcomingMovies = [Movie]()
     @Published private(set) var timer = Timer.publish(every: 3, on: .main, in: .common).autoconnect()
+    @Published var pageNumber = 1
     @Published var currentIndex = 0
     let imageUrl = "https://image.tmdb.org/t/p/w500/"
     private var isLoading = false
     private var error: Error?
     private let repository: MovieRepository
     private var cancellables = Set<AnyCancellable>()
+
     let columns = [
         GridItem(.adaptive(minimum: 120)),
     ]
@@ -36,8 +38,23 @@ class MovieListViewModel: ObservableObject {
         self.repository = repository
     }
 
+    func setPageNumber(_ newPageNumber: Int) {
+        guard newPageNumber >= 1 else { return }
+        pageNumber = newPageNumber
+        fetchMovies()
+    }
+
+    func incrementPageNumber() {
+        setPageNumber(pageNumber + 1)
+    }
+
+    func decrementPageNumber() {
+        setPageNumber(pageNumber - 1)
+    }
+
+
     func fetchMovies() {
-        fetchData(publisher: repository.getPopularMovies()) { [weak self] movies in
+        fetchData(publisher: repository.getPopularMovies(pageNumber: pageNumber)) { [weak self] movies in
             self?.popularMovieSList = movies
         }
     }

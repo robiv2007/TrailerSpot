@@ -15,8 +15,8 @@ public class MovieRepositoryImpl: MovieRepository {
     
     public init() { }
     
-    public func getPopularMovies() -> AnyPublisher<MovieList, ResultError> {
-        movieData.getPopularMovies()
+    public func getPopularMovies(pageNumber: Int) -> AnyPublisher<MovieList, ResultError> {
+        movieData.getPopularMovies(pageNumber: pageNumber)
     }
     
     public func getUpcomingMovies() -> AnyPublisher<MovieList, ResultError> {
