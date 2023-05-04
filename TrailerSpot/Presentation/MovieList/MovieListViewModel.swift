@@ -38,6 +38,10 @@ class MovieListViewModel: ObservableObject {
         self.repository = repository
     }
 
+    var pageNumberText: Int {
+        pageNumber <= 1 ? pageNumber : pageNumber - 1 
+    }
+
     func setPageNumber(_ newPageNumber: Int) {
         guard newPageNumber >= 1 else { return }
         pageNumber = newPageNumber

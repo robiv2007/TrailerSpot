@@ -11,7 +11,7 @@ import Domain
 
 struct MovieListView: View {
     @StateObject var vm = MovieListViewModel()
-    
+
     var body: some View {
         NavigationView {
             VStack(alignment: .leading, spacing: 16) {
@@ -19,15 +19,15 @@ struct MovieListView: View {
                 ScrollView() {
                     VStack(alignment: .leading, spacing: 16) {
                         carouselWithImages()
-                        
+
                         Text("Upcoming Movies")
                             .modifier(RoundedRectangleModifier())
-                        
+
                         horizontalGrid()
-                        
+
                         Text("Popular")
                             .modifier(RoundedRectangleModifier())
-                        
+
                         verticalGrid()
                             .onAppear {
                                 vm.fetchMovies()
@@ -36,7 +36,7 @@ struct MovieListView: View {
                     }
                     .font(.title)
                     .foregroundColor(.orange)
-                    
+
                     pageNumber()
                 }
                 .scrollIndicators(.hidden)
@@ -45,7 +45,7 @@ struct MovieListView: View {
             .padding(.horizontal, 8)
         }
     }
-    
+
     @ViewBuilder
     private func pageNumber() -> some View {
         HStack(spacing: 16) {
@@ -54,15 +54,15 @@ struct MovieListView: View {
             } label: {
                 HStack(spacing: 0) {
                     Image(systemName: "chevron.left")
-                    Text("\(vm.pageNumber <= 1 ? vm.pageNumber : vm.pageNumber - 1 )")
+                    Text("\(vm.pageNumberText)")
                 }
                 .tint(.gray)
             }
-            
+
             Text("Page \(vm.pageNumber)")
                 .font(.title)
                 .foregroundColor(.orange)
-            
+
             Button {
                 vm.incrementPageNumber()
             } label: {
@@ -74,7 +74,7 @@ struct MovieListView: View {
             }
         }
     }
-    
+
     @ViewBuilder
     private func carouselWithImages() -> some View {
         TabView(selection: $vm.currentIndex){
@@ -101,7 +101,7 @@ struct MovieListView: View {
             }
         }
     }
-    
+
     @ViewBuilder
     private func logo() -> some View {
         HStack(spacing: 8){
@@ -114,7 +114,7 @@ struct MovieListView: View {
                 .bold()
         }
     }
-    
+
     @ViewBuilder
     private func horizontalGrid() -> some View {
         ScrollView(.horizontal){
@@ -130,7 +130,7 @@ struct MovieListView: View {
             }
         }
     }
-    
+
     @ViewBuilder
     private func verticalGrid() -> some View {
         LazyVGrid(columns: vm.columns, spacing: 20) {
@@ -143,7 +143,7 @@ struct MovieListView: View {
             }
         }
     }
-    
+
     @ViewBuilder
     private func image(path: String, title: String) -> some View {
         AsyncImage(url: URL(string: "\(vm.imageUrl)\(path)")) {
