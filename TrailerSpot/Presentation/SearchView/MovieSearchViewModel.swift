@@ -17,6 +17,7 @@ class MovieSearchViewModel: ObservableObject {
     @Published var searchText = ""
     @Published var searchResultList: [Movie] = []
     @Published var popularMoviesList: [Movie] = []
+    @Published var pageNumber = 1
 
     let imageUrl = "https://image.tmdb.org/t/p/w500/"
     private var isLoading = false
@@ -40,7 +41,7 @@ class MovieSearchViewModel: ObservableObject {
     }
 
     func fetchPopularMovies() {
-        fetchData(publisher: repository.getPopularMovies()) { [weak self] movies in
+        fetchData(publisher: repository.getPopularMovies(pageNumber: pageNumber)) { [weak self] movies in
             self?.popularMoviesList = movies
         }
     }

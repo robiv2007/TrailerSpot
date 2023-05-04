@@ -29,6 +29,7 @@ struct MovieSearchView: View {
         }
         .padding(8)
         .onAppear(perform: vm.fetchPopularMovies)
+        .ignoresSafeArea(.keyboard)
     }
 
     @ViewBuilder

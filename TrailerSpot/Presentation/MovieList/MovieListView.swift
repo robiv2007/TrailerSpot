@@ -37,13 +37,42 @@ struct MovieListView: View {
                     .font(.title)
                     .foregroundColor(.orange)
 
+                    pageNumber()
                 }
                 .scrollIndicators(.hidden)
             }
             .preferredColorScheme(.dark)
             .padding(.horizontal, 8)
         }
+    }
 
+    @ViewBuilder
+    private func pageNumber() -> some View {
+        HStack(spacing: 16) {
+            Button {
+                vm.decrementPageNumber()
+            } label: {
+                HStack(spacing: 0) {
+                    Image(systemName: "chevron.left")
+                    Text("\(vm.pageNumberText)")
+                }
+                .tint(.gray)
+            }
+
+            Text("Page \(vm.pageNumber)")
+                .font(.title)
+                .foregroundColor(.orange)
+
+            Button {
+                vm.incrementPageNumber()
+            } label: {
+                HStack(spacing: 0) {
+                    Text("\(vm.pageNumber + 1)")
+                    Image(systemName: "chevron.right")
+                }
+                .tint(.gray)
+            }
+        }
     }
 
     @ViewBuilder
@@ -109,7 +138,7 @@ struct MovieListView: View {
                 NavigationLink(destination: MovieDetailView(movie: movie)) {
                     image(path: movie.posterPath,
                           title: movie.title)
-                        .frame(width: 120, height: 180)
+                    .frame(width: 120, height: 180)
                 }
             }
         }
