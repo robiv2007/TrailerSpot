@@ -23,10 +23,6 @@ public class MovieRepositoryImpl: MovieRepository {
         movieData.getUpcomingMovies()
     }
 
-    public func getTrailers(id: Int) -> AnyPublisher<MovieDetails, ResultError> {
-        movieData.getTrailers(id: id)
-    }
-
     public func getCast(id: Int) -> AnyPublisher<MovieCast, ResultError> {
         movieData.getCast(id: id)
     }

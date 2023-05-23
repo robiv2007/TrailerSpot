@@ -21,12 +21,17 @@ class MovieDetailViewModel: ObservableObject {
     
     let posterPath = "https://image.tmdb.org/t/p/w500/"
     private let repository: MovieRepository
+    private let trailerRepository: MovieTrailerItemsRepository
     private var isLoading = false
     private var error: Error?
     private var cancellables = Set<AnyCancellable>()
     
-    init(repository: MovieRepository = MovieRepositoryImpl()) {
+    init(
+        repository: MovieRepository = MovieRepositoryImpl(),
+        trailerRepository: MovieTrailerItemsRepository = MobieTrailerRepositoryImpl())
+    {
         self.repository = repository
+        self.trailerRepository = trailerRepository
     }
     
     func ratingSet(voteAverage: Double) {
@@ -35,7 +40,7 @@ class MovieDetailViewModel: ObservableObject {
     }
     
     func fetchTrailers(id: Int) {
-        fetchData(publisher: repository.getTrailers(id: id), assignResults: { [weak self] trailers in
+        fetchData(publisher: trailerRepository.getTrailers(id: id), assignResults: { [weak self] trailers in
             self?.trailerList = trailers.filter({$0.name == "Official Trailer" || $0.official })
         }, filterResults: { $0.videos.results })
     }
