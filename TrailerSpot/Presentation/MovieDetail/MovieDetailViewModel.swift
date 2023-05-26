@@ -22,16 +22,20 @@ class MovieDetailViewModel: ObservableObject {
     let posterPath = "https://image.tmdb.org/t/p/w500/"
     private let repository: MovieRepository
     private let trailerRepository: MovieTrailerItemsRepository
+    private let castRepository: MovieCastItemsRepository
     private var isLoading = false
     private var error: Error?
     private var cancellables = Set<AnyCancellable>()
     
     init(
         repository: MovieRepository = MovieRepositoryImpl(),
-        trailerRepository: MovieTrailerItemsRepository = MobieTrailerRepositoryImpl())
+        trailerRepository: MovieTrailerItemsRepository = MovieTrailerRepositoryImpl(),
+        castRepository: MovieCastItemsRepository = MovieCastItemsRepositoryImpl()
+    )
     {
         self.repository = repository
         self.trailerRepository = trailerRepository
+        self.castRepository = castRepository
     }
     
     func ratingSet(voteAverage: Double) {
@@ -46,7 +50,7 @@ class MovieDetailViewModel: ObservableObject {
     }
 
     func fetchCast(id: Int) {
-        fetchData(publisher: repository.getCast(id: id), assignResults: { [weak self] cast in
+        fetchData(publisher: castRepository.getCast(id: id), assignResults: { [weak self] cast in
             self?.castList = cast
         }, filterResults: { $0.cast })
     }

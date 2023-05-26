@@ -12,6 +12,5 @@ import Combine
 public protocol MovieData {
     func getPopularMovies(pageNumber:Int) -> AnyPublisher<MovieList, ResultError>
     func getUpcomingMovies() -> AnyPublisher<MovieList, ResultError>
-    func getCast(id: Int) -> AnyPublisher<MovieCast, ResultError>
     func getSearchResults(searchText: String) -> AnyPublisher<MovieList, ResultError>
 }
